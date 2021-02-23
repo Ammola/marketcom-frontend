@@ -12,6 +12,7 @@ import Product from './components/Product';
 import Model from './components/Model';
 import Register from './components/User/Register'
 import Login from './components/User/Login'
+import Profile from './components/User/profile'
 import { decode } from "jsonwebtoken";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
@@ -93,6 +94,7 @@ render() {
        <Route path="/cart" component={Cart}/>
        <Route path="/register"  component={Register}/>
        <Route path="/login"  component={() => isAuth ? <ProductList/> :<Login login={this.loginHandler}/>}/>
+       <Route path="/profile"  component={()=> isAuth ? <Profile  user1={this.state.user}/>:null}/>
        <Route component={Default}/>
      </Switch>
      <Model />
