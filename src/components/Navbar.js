@@ -36,8 +36,8 @@ export default class Navbar extends Component {
                     <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> Register</Link>
                     </li>
                     <li className="nav-item ml-5">
-                    { this.props.isAuth1 ?  <Link to={"logout"} onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Logout</Link>
-            :<Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
+                    { this.props.isAuth1 ?  <Link to="/logout" onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Logout</Link>
+            :<Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
                      </li>
                     <li className="nav-item ml-5">
                     <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Profile</Link>
