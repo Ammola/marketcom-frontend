@@ -1,9 +1,12 @@
 :root{
-  --mainBlue:#2a2a72;
-  --lightBlue:#009ffd;
+  --mainBlue:#CCCCFF;
+  --lightBlue:#581845;
   --mainWhite:#f3f3f3;
   --mainDark:#232528;
   --mainYellow:#ffa400;
+  --mainText:#232528;
+  --mainbac: #FFC300 ;
+  /* linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
 }
 
 body{
@@ -24,6 +27,7 @@ body{
 
 .text-bright{
   color: var(--lightBlue);
+  
 }
 
 .btn-black{

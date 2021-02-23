@@ -7,6 +7,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Addshop from './Addshop'
 import Editshop from './Editshop'
 import Deleteshop from './Deleteshop'
+import {Row, Col, Card, Form, InputGroup, FormControl, Button,CardGroup,Table} from 'react-bootstrap';
+
 
 export default class shop extends Component {
     constructor(props){
@@ -41,10 +43,26 @@ export default class shop extends Component {
   render() {
     return (
         <Router>
-            <h1>{this.state.newShop.shopName}</h1>
-            <Link  to={"addShop"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>
-            <Link  to={"editShop"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Edit Shop</Link>
-            <Link  to={"deleteShop"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link>
+            <Table striped bordered hover variant="blue" style={{  padding:'2%', width: '80%', float: 'none',
+    margin: '0 auto' }}>
+  <thead>
+    <tr>
+      <th><h1>Shop Name</h1></th>
+      <th><h1>Action</h1></th>
+      </tr>
+      </thead>
+      <tbody>
+    <tr>
+      <td>{this.state.newShop.shopName}</td>
+      <td> {(this.state.newShop.id ==="id") ?
+            null:<Link  to={"addShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>}{' '}
+            <Link  to={"editShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Shop</Link>{' '}
+            <Link  to={"deleteShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link></td>{' '}
+      </tr>
+      </tbody>
+      </Table>
+            
+           
             <Route  path="/addShop"  component={() =><Addshop usera={this.state.newUser}/>}/>
             <Route  path="/editShop"  component={() =><Editshop shops={this.state.newShop}/>}/>
             {/* <Route  path="/deleteShop"  component={() =><Deleteshop shops={this.state.newShop}/>}/> */}

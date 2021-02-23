@@ -4,7 +4,7 @@ import logo from '../Mylogo.svg'
 import styled from 'styled-components'
 import { ButtonContainer } from './Button' 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faUserPlus, faSignInAlt, faSignOutAlt,faAddressCard} from '@fortawesome/free-solid-svg-icons';
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -29,18 +29,19 @@ export default class Navbar extends Component {
                     Creative Commons (Attribution 3.0 Unported);
                     https://www.iconfinder.com/Makoto_msk */}
                 <Link to="/">
-                    <img src={logo} alt="store" className="navbar-brand" />
+                    <h2 className="nav-link"> MARKAT.COM</h2>
                 </Link>
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
-                    <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> Register</Link>
+                    { this.props.isAuth1 ?null:
+                    <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> Register</Link>}
                     </li>
                     <li className="nav-item ml-5">
-                    { this.props.isAuth1 ?  <Link to="/logout" onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Logout</Link>
+                    { this.props.isAuth1 ?  <Link to="/logout" onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</Link>
             :<Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
                      </li>
                     <li className="nav-item ml-5">
-                    { this.props.isAuth1 ? <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Profile</Link>:null}
+                    { this.props.isAuth1 ? <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faAddressCard} /> Profile</Link>:null}
                     </li>
                     <li>
                         <Link to="/" className="nav-link">
@@ -63,10 +64,13 @@ export default class Navbar extends Component {
 }
 
 const NavWrapper = styled.nav`
-background: var(--mainBlue);
+background: var(--mainbac);
+box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+margin-bottom: 10px;
 .nav-link{
-    color: var(--mainWhite) !important;
+    color: var(--mainText) !important;
     font-size:1.3rem;
     text-transform: capitalize;
+    
 }
 `

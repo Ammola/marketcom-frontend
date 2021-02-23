@@ -1,0 +1,14 @@
+
+.footer {
+   
+    bottom: 0;
+    width: 100%;
+}
+.container1{
+    background-color: #4d004d;
+}
+.infoCont{
+    color: white;
+    font-weight: 100;
+    margin: 10px;
+}

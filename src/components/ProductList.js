@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Product from './Product';
 import Title from './Title';
 import { ProductConsumer } from '../context';
+import CarouselImageSlider from '../Home/CarouselImageSlider'
 export default class ProductList extends Component {
     // constructor(props) {
     //     super(props)
@@ -14,6 +15,7 @@ export default class ProductList extends Component {
     render() {
         return (
             <>
+             <CarouselImageSlider/>
                 <div className="py-5">
                     <div className="container">
                         <Title name="our" title="products "/>
@@ -28,6 +30,7 @@ export default class ProductList extends Component {
                         </div>
                     </div>
                 </div>
+                
             </>
             //    
         )

@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { Alert } from "react-bootstrap";
+
 
 
 
@@ -11,13 +13,29 @@ export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            newUser:{}
+            newUser:{},
+            message: null,
+    successMessage: null,
          }
     }
     registerHandler=(newUser)=>{
         axios.post("marketcom/user/registration",newUser)
         .then(response=>{
           console.log(response)
+          if (response.data != null) {
+            this.setState({
+             
+              successMessage: "Successfully register in!!!",
+                message: null
+            });
+           
+          }
+          else {
+            this.setState({
+              
+              message: "Error Occured. Please try again later!!!",
+            });
+          }
         })
         .catch(error=>{
           console.log(error);
@@ -32,7 +50,15 @@ export default class Register extends Component {
     }
 
   render() {
+    const message = this.state.message ? (
+        <Alert variant="danger">{this.state.message}</Alert>
+      ) : null;
+      const successMessage = this.state.successMessage ? (
+        <Alert variant="success">{this.state.successMessage}</Alert>
+      ) : null;
     return (
+        <div>
+            {message} {successMessage}
         <Row className="justify-content-md-center">
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
@@ -90,6 +116,7 @@ export default class Register extends Component {
                     </Card>
                     </Col>
                     </Row>
+                    </div>
     )
   }
 }
