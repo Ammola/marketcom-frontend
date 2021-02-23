@@ -3,6 +3,8 @@ import {Row, Col, Card, Form, InputGroup, FormControl, Button} from 'react-boots
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 export default class Editshop extends Component {
     constructor(props){
@@ -45,7 +47,9 @@ export default class Editshop extends Component {
                   <Form.Label>Shop Name</Form.Label>
                   <Form.Control type="text" name="shopName" value={this.state.newshop.shopName} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
-              <Button variant="primary" block onClick={()=>this.editHandler(this.state.newshop)}>Update</Button>
+              <Link to="/profile" className="nav-link">
+                    <Button variant="primary" block  onClick={()=>this.editHandler(this.state.newshop)}>Update</Button>
+                    </Link>
               </Card.Body>
               </Card>
               </Col>
