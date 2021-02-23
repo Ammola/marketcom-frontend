@@ -33,7 +33,7 @@ export default class Register extends Component {
           else {
             this.setState({
               
-              message: "Error Occured. Please try again later!!!",
+              message: "password don't match!!!",
             });
           }
         })
@@ -59,13 +59,14 @@ export default class Register extends Component {
     return (
         <div>
             {message} {successMessage}
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-md-center" >
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
                 <Card.Header>
                     <FontAwesomeIcon icon={faUserPlus}/> Register
                 </Card.Header>
                 <Card.Body>
+                    <Form>
                 <Form.Group>
                   <Form.Label>First Name</Form.Label>
                   <Form.Control type="text" name="firstName" onChange={this.changeHandler}></Form.Control>
@@ -112,6 +113,7 @@ export default class Register extends Component {
                     </Form.Group>
                     <Button variant="primary" block onClick={()=>this.registerHandler(this.state.newUser)}>Register</Button>
                    <p>Already have account? <Link to="/login">Sign In</Link></p> 
+                   </Form>
                     </Card.Body>
                     </Card>
                     </Col>
