@@ -7,6 +7,21 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 export default class Navbar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isAuth2:props.isAuth1
+           // id:props.user1.id
+         }
+    }
+    onLogoutHandler = (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        this.setState({
+          isAuth2: false,
+          user: null,
+        });
+      };
     render() {
         return (
             <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
@@ -21,8 +36,9 @@ export default class Navbar extends Component {
                     <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> Register</Link>
                     </li>
                     <li className="nav-item ml-5">
-                    <Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
-                    </li>
+                    { this.props.isAuth1 ?  <Link to={"logout"} onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Logout</Link>
+            :<Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
+                     </li>
                     <li className="nav-item ml-5">
                     <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Profile</Link>
                     </li>
