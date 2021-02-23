@@ -49,7 +49,8 @@ export default class profile extends Component {
         <Router>
       
                <Link  to={"editprofile"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Edit Profile</Link>
-               <Link  to={"shop"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Shop</Link>
+               {(this.state.user2.userRole === "ROLE_OWNER") ?
+               <Link  to={"shop"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Shop</Link>:null}
                <Route  path="/editprofile"  component={() =><Editprofile usera={this.state.user2}/>}/>
                <Route  path="/shop"  component={() =><Shop usera={this.state.user2} />}/>
                
