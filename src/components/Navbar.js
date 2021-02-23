@@ -40,7 +40,7 @@ export default class Navbar extends Component {
             :<Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
                      </li>
                     <li className="nav-item ml-5">
-                    <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Profile</Link>
+                    { this.props.isAuth1 ? <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Profile</Link>:null}
                     </li>
                     <li>
                         <Link to="/" className="nav-link">
