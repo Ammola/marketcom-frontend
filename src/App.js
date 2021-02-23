@@ -10,6 +10,8 @@ import Default from './components/Default';
 import ProductList from './components/ProductList';
 import Product from './components/Product';
 import Model from './components/Model';
+import Register from './components/User/Register'
+import { decode } from "jsonwebtoken";
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
        <Route exact path="/" component={ProductList}/>
        <Route path="/details" component={Details}/>
        <Route path="/cart" component={Cart}/>
+       <Route path="/register"  component={Register}/>
        <Route component={Default}/>
      </Switch>
      <Model />

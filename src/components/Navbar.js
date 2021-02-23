@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import logo from '../Mylogo.svg'
 import styled from 'styled-components'
 import { ButtonContainer } from './Button' 
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 
 export default class Navbar extends Component {
     render() {
@@ -16,6 +18,15 @@ export default class Navbar extends Component {
                 </Link>
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
+                    <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> Register</Link>
+                    </li>
+                    <li className="nav-item ml-5">
+                    <Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>
+                    </li>
+                    <li className="nav-item ml-5">
+                    <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Profile</Link>
+                    </li>
+                    <li>
                         <Link to="/" className="nav-link">
                             Products
                         </Link>
@@ -29,7 +40,7 @@ export default class Navbar extends Component {
                         my cart
                     </ButtonContainer>
                 </Link>
-                
+               
             </NavWrapper>
         )
     }
