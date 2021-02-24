@@ -28,9 +28,9 @@ class ProductProvider extends Component {
         axios.get("/marketcom/product/indexall")
         .then(response =>{
             console.log(response)
-            this.setState({
-                products: response.data
-            })
+            this.setState(()=>{
+                        return {products: response.data}
+                    })
         })
         .catch(error =>{
             console.log("Error retreiving products !!");
