@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { storeProducts, detailProduct } from './data';
+import {detailProduct } from './data';
+import axios from "axios";
 
 const ProductContext = React.createContext();
 //Provider
@@ -21,19 +22,32 @@ class ProductProvider extends Component {
         }
     }
     componentDidMount(){
-        this.setProducts();
+        this.loadProductList();
+    }
+    loadProductList = () => {
+        axios.get("/marketcom/product/indexall")
+        .then(response =>{
+            console.log(response)
+            this.setState({
+                products: response.data
+            })
+        })
+        .catch(error =>{
+            console.log("Error retreiving Authors !!");
+            console.log(error);
+        })
     }
 
-    setProducts = () => {
-        let tempProducts = [];
-        storeProducts.forEach(item => {
-            const singleItem = {...item};
-            tempProducts = [...tempProducts,singleItem];
-        })
-        this.setState(()=>{
-            return {products: tempProducts}
-        })
-    }
+    // setProducts = () => {
+    //     let tempProducts = [];
+    //     this.loadProductList.forEach(item => {
+    //         const singleItem = {...item};
+    //         tempProducts = [...tempProducts,singleItem];
+    //     })
+    //     this.setState(()=>{
+    //         return {products: tempProducts}
+    //     })
+    // }
 
     getItem = (id) => {
         const product = this.state.products.find(item => item.id === id);
@@ -54,7 +68,7 @@ class ProductProvider extends Component {
         const product = tempProducts[index];
         product.inCart = true;
         product.count = 1;
-        const price = product.price;
+        const price = product.productPrice;
         product.total = price;
         this.setState(() =>{
             return { products: tempProducts,cart:[...this.state.cart, product] };

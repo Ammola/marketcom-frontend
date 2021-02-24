@@ -16,6 +16,7 @@ import Profile from './components/User/profile'
 import { decode } from "jsonwebtoken";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
+import Footer from './Home/Footer'
 
 
 
@@ -87,16 +88,18 @@ render() {
   ) : null;
   return (
    <>
+    {message} {successMessage}
      <Navbar isAuth1={this.state.isAuth}/>
      <Switch>
        <Route exact path="/" component={ProductList}/>
        <Route path="/details" component={Details}/>
        <Route path="/cart" component={Cart}/>
-       <Route path="/register"  component={Register}/>
+       <Route path="/register"  component={() => isAuth ? <ProductList/>:<Register/>}/>
        <Route path="/login"  component={() => isAuth ? <ProductList/> :<Login login={this.loginHandler}/>}/>
        <Route path="/profile"  component={()=> isAuth ? <Profile  user1={this.state.user}/>:null}/>
        <Route component={Default}/>
      </Switch>
+     <Footer/>
      <Model />
    </>
   )
