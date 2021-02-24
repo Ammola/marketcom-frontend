@@ -5,20 +5,15 @@ import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawes
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
 
-
-
-export default class ProductNewForm extends Component {
+export default class EditProduct extends Component {
     constructor(props){
         super(props);
         this.state ={
-            shpq : props.shops,
-            newProduct : {}
+            newProduct : props.pro
         }
     }
-
-    addHandler=(newProduct,id)=>{
-        axios.post(`/marketcom/product/add?shopId=${id}`,newProduct, 
-        {headers: {'Content-Type': 'application/json',}})
+    editHandler=(newProduct)=>{
+        axios.put("marketcom/shop/edit",newProduct)
         .then(response=>{
           console.log(response)
         })
@@ -41,17 +36,17 @@ export default class ProductNewForm extends Component {
     <Col xs={5}>
         <Card className={"border border-dark bg-white text-dark"}>
             <Card.Header>
-                <FontAwesomeIcon icon={faUserPlus}/> Add Product
+                <FontAwesomeIcon icon={faUserPlus}/> Edit Product
             </Card.Header>
             <Card.Body>
                 <Form>
             <Form.Group>
               <Form.Label>Product Name</Form.Label>
-              <Form.Control type="text" name="productName" onChange={this.changeHandler}></Form.Control>
+              <Form.Control type="text" name="productName" value={this.state.newProduct.productName} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
           <Form.Group>
                     <Form.Label>Category</Form.Label>
-                    <Form.Control as="select" name="category" onChange={this.changeHandler}>
+                    <Form.Control as="select" name="category" value={this.state.newProduct.category} onChange={this.changeHandler}>
                     <option value="">Select Category</option>
                         <option value="men">Men</option>
                         <option value="women">Women</option>
@@ -60,25 +55,25 @@ export default class ProductNewForm extends Component {
                 </Form.Group>
           <Form.Group>
               <Form.Label>Product Size</Form.Label>
-              <Form.Control type="text" name="productSize" onChange={this.changeHandler}></Form.Control>
+              <Form.Control type="text" name="productSize" value={this.state.newProduct.productSize} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
           <Form.Group>
               <Form.Label>Product Imge</Form.Label>
-              <Form.Control type="text" name="productImage" onChange={this.changeHandler}></Form.Control>
+              <Form.Control type="text" name="productImage" value={this.state.newProduct.productImage} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
           <Form.Group>
               <Form.Label>Product Color</Form.Label>
-              <Form.Control type="color" name="productColor" onChange={this.changeHandler}></Form.Control>
+              <Form.Control type="color" name="productColor" value={this.state.newProduct.productColor} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
           <Form.Group>
               <Form.Label>Product Price</Form.Label>
-              <Form.Control type="txt" name="productPrice" onChange={this.changeHandler}></Form.Control>
+              <Form.Control type="txt" name="productPrice"value={this.state.newProduct.productPrice}  onChange={this.changeHandler}></Form.Control>
           </Form.Group>
           <Form.Group>
               <Form.Label>Product Description</Form.Label>
-              <Form.Control name="productDescription" as="textarea" rows={3} onChange={this.changeHandler}></Form.Control>
+              <Form.Control name="productDescription" as="textarea" rows={3} value={this.state.newProduct.productDescription} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
-                <Button variant="primary" block onClick={()=>this.addHandler(this.state.newProduct,this.state.shpq.id)}>Add</Button>
+                <Button variant="primary" block onClick={()=>this.editHandler(this.state.newProduct)}>Update</Button>
                </Form>
                 </Card.Body>
                 </Card>

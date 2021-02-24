@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export default class Product extends Component {
     render() {
-        const {id, productName, img, productPrice, inCart} = this.props.product;
+        const {id, productName, productImage, productPrice, inCart} = this.props.product;
         //const myImg = require(img); 
         //var imageName = require(img);
         return (
@@ -16,7 +16,7 @@ export default class Product extends Component {
                         {value => (
                         <div className="img-container p-5" onClick={() => value.handleDetail(id)}>
                      <Link to="/details">
-                         <img src={process.env.PUBLIC_URL + img} alt="product" className="card-img-top" />
+                         <img src={productImage} alt="product" className="card-img-top" />
                      </Link>
                      <button className="cart-btn" disabled={inCart ? true : false} onClick={() =>{
                          value.addToCart(id);
