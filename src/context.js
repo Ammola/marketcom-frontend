@@ -33,7 +33,7 @@ class ProductProvider extends Component {
             })
         })
         .catch(error =>{
-            console.log("Error retreiving Authors !!");
+            console.log("Error retreiving products !!");
             console.log(error);
         })
     }
