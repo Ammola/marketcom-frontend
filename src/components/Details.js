@@ -8,11 +8,11 @@ export default class Details extends Component {
         return (
             <ProductConsumer>
                 {(value) => {
-                    const {id, category, img, productDescription, productPrice, productName, inCart} = value.detailProduct;
+                    const {id, category, productImage, productDescription, productPrice, productName, inCart} = value.detailProduct;
                     return(
                         <div className="container py-5">
                             <div className="row">
-                                <div className="col-10 mx-auto text-center text-slanted text-blue my-5">
+                                <div className="col-10 mx-auto text-center text-slanted text-Yellow my-5">
                                     <h1>{ productName }</h1>
                                 </div>
                             </div>
@@ -20,13 +20,13 @@ export default class Details extends Component {
                             {/* product info */}
                             <div className="row">
                                 <div className="col-10 mx-auto col-md-6 my-3">
-                                    <img src={img} className="img-fluid" alt="product"/>
+                                    <img src={productImage} className="img-fluid" alt="product"/>
                                     </div>
                                     {/* product text */}
                                 <div className="col-10 mx-auto col-md-6 my-3 text-capitalize">
-                                    <h3>model: {productName}</h3>
+                                    <h3>Product Type: {productName}</h3>
                                     <h4 className="text-title text-uppercase text-muted mt-3 mb-2">
-                                        made by: <span className="text-uppercase">{category}</span>
+                                    Category: <span className="text-uppercase">{category}</span>
                                     </h4>
                                     <h4 className="text-blue">
                                         <strong>

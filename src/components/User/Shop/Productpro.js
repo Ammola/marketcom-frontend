@@ -4,6 +4,7 @@ import ProductNewForm from './ProductNewForm'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {BrowserRouter as Router, Switch, Route,Link} from 'react-router-dom';
+import EditProduct from './EditProduct'
 
 
 export default class Productpro extends Component {
@@ -11,7 +12,7 @@ export default class Productpro extends Component {
         super(props);
         this.state ={
             shop : props.shops,
-            newProudct:{}
+            newProudct:[]
         }
 
     }
@@ -39,8 +40,18 @@ export default class Productpro extends Component {
     return (
         <Router>
       <div>
-          <Link  to={"addProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>
+      <h1>Authors List</h1>
+                {/* <ul>
+                    {this.state.newProudct.map((product, index) =>
+                    <div  key={index}>
+                    <li>{this.state.product.id}</li>
+                    </div>)}
+                    </ul> */}
+          <Link  to={"addProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Product</Link>
+          <Link  to={"editProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Product</Link>
           <Route  path="/addProduct"  component={() =><ProductNewForm shops={this.state.shop}/>}/>
+          <Route  path="/editProduct"  component={() =><EditProduct pro={this.state.newProudct}/>}/>
+
       </div>
       </Router>
     )
