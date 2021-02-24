@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export default class Product extends Component {
     render() {
-        const {id, title, img, price, inCart} = this.props.product;
+        const {id, productName, img, productPrice, inCart} = this.props.product;
         //const myImg = require(img); 
         //var imageName = require(img);
         return (
@@ -36,11 +36,11 @@ export default class Product extends Component {
                     {/* card footer*/}
                     <div className="card-footer d-flex justify-content-between">
                     <p className="align-self-center mb-0">
-                        {title}
+                        {productName}
                     </p>
                     <h5 className="text-blue mb-0">
                         <span className="mr-1">$</span>
-                        {price}
+                        {productPrice}
                     </h5>
                     </div>
                 </div>

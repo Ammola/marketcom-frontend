@@ -8,6 +8,7 @@ import Addshop from './Addshop'
 import Editshop from './Editshop'
 import Deleteshop from './Deleteshop'
 import {Row, Col, Card, Form, InputGroup, FormControl, Button,CardGroup,Table} from 'react-bootstrap';
+import Productpro from './Productpro'
 
 
 export default class shop extends Component {
@@ -54,10 +55,12 @@ export default class shop extends Component {
       <tbody>
     <tr>
       <td>{this.state.newShop.shopName}</td>
-      <td> {(this.state.newShop.id ==="id") ?
+      <td> {(this.state.newShop.id ==="0") ?
             null:<Link  to={"addShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>}{' '}
             <Link  to={"editShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Shop</Link>{' '}
-            <Link  to={"deleteShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link></td>{' '}
+            <Link  to={"deleteShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link>{' '}
+            <Link  to={"shopproduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Proudct</Link></td>{' '}
+
       </tr>
       </tbody>
       </Table>
@@ -65,6 +68,8 @@ export default class shop extends Component {
            
             <Route  path="/addShop"  component={() =><Addshop usera={this.state.newUser}/>}/>
             <Route  path="/editShop"  component={() =><Editshop shops={this.state.newShop}/>}/>
+            <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
+
             {/* <Route  path="/deleteShop"  component={() =><Deleteshop shops={this.state.newShop}/>}/> */}
             {/* <button onClick={()=>this.deleteshop(this.state.newShop.id)}>Delete</button> */}
       </Router>
