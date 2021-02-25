@@ -35,11 +35,8 @@ changeHandler = (e) => {
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" name="password" onChange={this.changeHandler}></Form.Control>
               </Form.Group>
-              <Button variant="primary" block onClick={this.loginHandler}>Login</Button>
-             
-                   
-                    <Link to="/forgotpassword" className="btn btn-primary">Forgot Password</Link>
-                    <p>Don't have account? <Link to="/register">Sign Up</Link></p> 
+              <Button variant="primary" block onClick={this.loginHandler}>Login</Button>  
+   <p>Don't have account? <Link to="/register">Sign Up</Link></p> 
                     </Card.Body>
                     </Card>
                     </Col>
