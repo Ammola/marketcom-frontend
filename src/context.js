@@ -141,9 +141,11 @@ increment = (id) =>{
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
     product.count = product.count +1;
-    product.total = product.count * product.price;
+    product.total = product.count * product.productPrice;
+    console.log("typeof product.price")
+    console.log(typeof product.productPrice)
     this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
-    console.log("cart after increment:  ")
+    console.log("cart state after increment:  ")
     console.log(this.state.cart)
 }
 
@@ -156,7 +158,7 @@ decrement = (id) => {
     if(product.count === 0){
         this.removeItem(id)
     }else {
-        product.total = product.count * product.price;
+        product.total = product.count * product.productPrice;
         this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
     }
     
