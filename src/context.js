@@ -143,6 +143,8 @@ increment = (id) =>{
     product.count = product.count +1;
     product.total = product.count * product.price;
     this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
+    console.log("cart after increment:  ")
+    console.log(this.state.cart)
 }
 
 decrement = (id) => {
