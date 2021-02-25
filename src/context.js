@@ -62,27 +62,29 @@ class ProductProvider extends Component {
 
     getItem = (id) => {
         const product = this.state.products.find(item => item.id === id);
-        console.log("this.state.products from getItem: ");
-        console.log(this.state.products);
-        console.log("product from getItem:  ");
-        console.log(product);
         return product;
     }
     
 
     handleDetail = (id) => {
         const product = this.getItem(id);
-        console.log("product from handleDetail:   ");
-        console.log(product);
         this.setState(() => {
             return {detailProduct:product}
         })
-        localStorage.setItem('productDetailId', id);
         localStorage.setItem('detailProduct', JSON.stringify(product));
         
     }
 
     addToCart = (id) => {
+        // let product = getItem(id);
+        // axios.post(`/marketcom/product/add?shopId=${id}`,product, 
+        // {headers: {'Content-Type': 'application/json',}})
+        // .then(response=>{
+        //     console.log(response)
+        //   })
+        //   .catch(error=>{
+        //     console.log(error);
+        //   })
         let tempProducts = [...this.state.products];
         const index = tempProducts.indexOf(this.getItem(id));
         const product = tempProducts[index];
@@ -94,6 +96,17 @@ class ProductProvider extends Component {
             return { products: tempProducts,cart:[...this.state.cart, product] };
         }, ()=>{this.addTotals()}) 
     }
+
+    // addHandler=(newProduct,id)=>{
+    //     axios.post(`/marketcom/product/add?shopId=${id}`,newProduct, 
+    //     {headers: {'Content-Type': 'application/json',}})
+    //     .then(response=>{
+    //       console.log(response)
+    //     })
+    //     .catch(error=>{
+    //       console.log(error);
+    //     })
+    //   }
 
     openModel = (id) => {
         const product = this.getItem(id);

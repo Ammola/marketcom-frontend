@@ -43,7 +43,7 @@ export default class Details extends Component {
                                     <p className="text-capitalize mt-1 mb-5">{productDescription}</p>
                                     <h4 className="text-blue">
                                         <strong>
-                                        price: <span>$</span>
+                                        price: <span>SR</span>
                                         {productPrice}
                                         </strong>
                                     </h4>
