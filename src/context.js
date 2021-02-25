@@ -29,6 +29,7 @@ class ProductProvider extends Component {
     loadProductList = () => {
         axios.get("/marketcom/product/indexall")
              .then(response =>{
+            console.log("response:   ")
             console.log(response)
             this.setState(()=>{
                         return {products: response.data}
@@ -88,13 +89,22 @@ class ProductProvider extends Component {
         let tempProducts = [...this.state.products];
         const index = tempProducts.indexOf(this.getItem(id));
         const product = tempProducts[index];
+        console.log("product from add to cart:    ");
+        console.log(product);
         product.inCart = true;
         product.count = 1;
         const price = product.productPrice;
         product.total = price;
         this.setState(() =>{
-            return { products: tempProducts,cart:[...this.state.cart, product] };
-        }, ()=>{this.addTotals()}) 
+            return {cart:[...this.state.cart, product]}
+        }, ()=>{this.addTotals()
+                console.log("cart after totals:  ")
+                console.log(this.state.cart)
+                console.log("product after totals:  ")
+                console.log(product)
+                console.log("product state after totals:  ")
+                console.log(this.state.products)
+        })
     }
 
     // addHandler=(newProduct,id)=>{

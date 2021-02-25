@@ -10,7 +10,9 @@ export default class Model extends Component {
             <ProductConsumer>
                 {(value) =>{
                 const {modelOpen, closeModel} = value;
-                const{img, title, price} = value.modelProduct;
+                const{productImage, productName, productPrice} = value.modelProduct;
+                console.log("value.modelProduct")
+                console.log(value.modelProduct)
 
                 if(!modelOpen){
                     return null;
@@ -22,9 +24,9 @@ export default class Model extends Component {
                             <div className="row">
                                 <div id="model" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
                                     <h5>item added to the cart</h5>
-                                    <img src={img} className="img-fluid" alt="product"></img>
-                                    <h5>{title}</h5>
-                                    <h5 className="text-muted">price: $ {price}</h5>
+                                    <img src={productImage} className="img-fluid" alt="product"></img>
+                                    <h5>{productName}</h5>
+                                    <h5 className="text-muted">price: SR {productPrice}</h5>
                                     <Link to="/">
                                         <ButtonContainer onClick={() => closeModel()}>
                                             store
