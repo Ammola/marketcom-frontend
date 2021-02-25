@@ -16,16 +16,21 @@ export default class ProductNewForm extends Component {
         }
     }
 
-    addHandler=(newProduct,id)=>{
-        axios.post(`/marketcom/product/add?shopId=${id}`,newProduct, 
-        {headers: {'Content-Type': 'application/json',}})
-        .then(response=>{
-          console.log(response)
-        })
-        .catch(error=>{
-          console.log(error);
-        })
-      }
+    // addHandler=(newProduct,id)=>{
+    //     axios.post(`/marketcom/product/add?shopId=${id}`,newProduct, 
+    //     {headers: {'Content-Type': 'application/json',}})
+    //     .then(response=>{
+    //       console.log(response)
+    //     })
+    //     .catch(error=>{
+    //       console.log(error);
+    //     })
+    //   }
+    addHandler =(event) =>{
+        event.preventDefault()
+
+        this.props.addProduct(this.state.newProduct);
+    }
       changeHandler=(e)=>{
         let temp={...this.state.newProduct}
     temp[e.target.name]=e.target.value;
@@ -78,7 +83,7 @@ export default class ProductNewForm extends Component {
               <Form.Label>Product Description</Form.Label>
               <Form.Control name="productDescription" as="textarea" rows={3} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
-                <Button variant="primary" block onClick={()=>this.addHandler(this.state.newProduct,this.state.shpq.id)}>Add</Button>
+                <Button variant="primary" block onClick={this.addHandler}>Add</Button>
                </Form>
                 </Card.Body>
                 </Card>

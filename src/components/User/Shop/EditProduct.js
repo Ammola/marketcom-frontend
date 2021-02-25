@@ -9,18 +9,23 @@ export default class EditProduct extends Component {
     constructor(props){
         super(props);
         this.state ={
-            newProduct : props.pro
+            newProduct : props.product
         }
     }
-    editHandler=(newProduct)=>{
-        axios.put("marketcom/shop/edit",newProduct)
-        .then(response=>{
-          console.log(response)
-        })
-        .catch(error=>{
-          console.log(error);
-        })
-      }
+    // editHandler=(newProduct)=>{
+    //     axios.put("marketcom/shop/edit",newProduct)
+    //     .then(response=>{
+    //       console.log(response)
+    //     })
+    //     .catch(error=>{
+    //       console.log(error);
+    //     })
+    //   }
+      editHandler =(event) =>{
+        event.preventDefault()
+
+        this.props.editProduct(this.state.newProduct);
+    }
       changeHandler=(e)=>{
         let temp={...this.state.newProduct}
     temp[e.target.name]=e.target.value;
@@ -73,7 +78,7 @@ export default class EditProduct extends Component {
               <Form.Label>Product Description</Form.Label>
               <Form.Control name="productDescription" as="textarea" rows={3} value={this.state.newProduct.productDescription} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
-                <Button variant="primary" block onClick={()=>this.editHandler(this.state.newProduct)}>Update</Button>
+                <Button variant="primary" block onClick={this.editHandler}>Update</Button>
                </Form>
                 </Card.Body>
                 </Card>
