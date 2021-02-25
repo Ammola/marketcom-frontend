@@ -70,7 +70,7 @@ export default class shop extends Component {
             <Route  path="/editShop"  component={() =><Editshop shops={this.state.newShop}/>}/>
             <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
 
-            {/* <Route  path="/deleteShop"  component={() =><Deleteshop shops={this.state.newShop}/>}/> */}
+            <Route  path="/deleteShop"  component={() =><Deleteshop shops={this.state.newShop} userd={this.state.newUser}/>}/>
             {/* <button onClick={()=>this.deleteshop(this.state.newShop.id)}>Delete</button> */}
       </Router>
     )

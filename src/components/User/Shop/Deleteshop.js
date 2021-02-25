@@ -9,10 +9,11 @@ export default class Deleteshop extends Component {
         super(props);
         this.state ={
             newshop : props.shops,
+            user:props.userd
         }
     }
-    deleteshop= (id) =>{
-        axios.delete(`/marketcom/shop/delete?id=${id}`,{
+    deleteshop= (userId,id) =>{
+        axios.delete(`/marketcom/shop/delete?userId=${this.state.user.id}`,{
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
