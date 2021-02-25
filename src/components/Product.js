@@ -39,7 +39,7 @@ export default class Product extends Component {
                         {productName}
                     </p>
                     <h5 className="text-blue mb-0">
-                        <span className="mr-1">$</span>
+                        <span className="mr-1">SR</span>
                         {productPrice}
                     </h5>
                     </div>

@@ -111,7 +111,9 @@ export default class Register extends Component {
                             <option value="ROLE_OWNER">Shop Owner</option>
                         </Form.Control>
                     </Form.Group>
+                    <Link to="/">
                     <Button variant="primary" block onClick={()=>this.registerHandler(this.state.newUser)}>Register</Button>
+                    </Link>
                    <p>Already have account? <Link to="/login">Sign In</Link></p> 
                    </Form>
                     </Card.Body>
