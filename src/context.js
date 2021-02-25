@@ -12,28 +12,39 @@ class ProductProvider extends Component {
     
         this.state = {
              products: [],
-             detailProduct: detailProduct,
+             detailProduct: {},
              cart: [],
              modelOpen: false,
-             modelProduct: detailProduct,
+             modelProduct: {},
              cartSubTotal: 0,
              cartTax: 0,
              cartTotal: 0
         }
     }
+
     componentDidMount(){
         this.loadProductList();
     }
+
     loadProductList = () => {
         axios.get("/marketcom/product/indexall")
-        .then(response =>{
+             .then(response =>{
             console.log(response)
             this.setState(()=>{
                         return {products: response.data}
                     })
+
+            console.log("products from loadProductList:  ");
+            console.log(this.state.products);
+            let id = localStorage.getItem('productDetailId');
+            console.log("id from local storage: "+id); 
+            id = parseInt(id);
+            console.log("product from local storage: "); 
+            const myProduct = this.getItem(id);
+            console.log(myProduct);
         })
         .catch(error =>{
-            console.log("Error retreiving products !!");
+            console.log("Error retreiving products!!");
             console.log(error);
         })
     }
@@ -51,15 +62,24 @@ class ProductProvider extends Component {
 
     getItem = (id) => {
         const product = this.state.products.find(item => item.id === id);
+        console.log("this.state.products from getItem: ");
+        console.log(this.state.products);
+        console.log("product from getItem:  ");
+        console.log(product);
         return product;
     }
+    
 
     handleDetail = (id) => {
-        console.log(`Hello from handle detail the id ${id}`);
         const product = this.getItem(id);
+        console.log("product from handleDetail:   ");
+        console.log(product);
         this.setState(() => {
             return {detailProduct:product}
         })
+        localStorage.setItem('productDetailId', id);
+        localStorage.setItem('detailProduct', JSON.stringify(product));
+        
     }
 
     addToCart = (id) => {
@@ -89,7 +109,7 @@ class ProductProvider extends Component {
     }
 
     productDetail = (id) => {
-        console.log(`Hello from handle Details ${id}`);
+        console.log(`Hello from product Details ${id}`);
     }
 
 increment = (id) =>{
@@ -99,11 +119,7 @@ increment = (id) =>{
     const product = tempCart[index];
     product.count = product.count +1;
     product.total = product.count * product.price;
-
-
     this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
-
-
 }
 
 decrement = (id) => {
@@ -146,10 +162,11 @@ clearCart = () => {
     this.setState(() => {
         return { cart: []};
     }, () => {
-        this.setProducts();
+        // this.setProducts();
         this.addTotals();
     });
 }
+
 addTotals = () => {
     let subTotal = 0;
     this.state.cart.map(item => (subTotal += item.total))
@@ -177,7 +194,9 @@ addTotals = () => {
                   increment: this.increment,
                   decrement: this.decrement,
                   removeItem: this.removeItem,
-                  clearCart: this.clearCart
+                  clearCart: this.clearCart, 
+                  getItem: this.getItem, 
+                  loadProductList: this.loadProductList
               }}>
                   {this.props.children}
               </ProductContext.Provider>                
