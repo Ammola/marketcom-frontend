@@ -56,10 +56,10 @@ export default class shop extends Component {
     <tr>
       <td>{this.state.newShop.shopName}</td>
       <td> {(this.state.newShop.id ==="0") ?
-            null:<Link  to={"addShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>}{' '}
-            <Link  to={"editShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Shop</Link>{' '}
-            <Link  to={"deleteShop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link>{' '}
-            <Link  to={"shopproduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Proudct</Link></td>{' '}
+            null:<Link  to={"addShop"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>}
+            <Link  to={"editShop"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Edit Shop</Link>
+            <Link  to={"deleteShop"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link>
+            <Link  to={"shopproduct"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Proudct</Link></td>
 
       </tr>
       </tbody>

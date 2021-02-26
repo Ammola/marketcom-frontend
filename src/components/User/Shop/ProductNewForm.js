@@ -44,7 +44,7 @@ export default class ProductNewForm extends Component {
         {/* {message} {successMessage} */}
     <Row className="justify-content-md-center" >
     <Col xs={5}>
-        <Card className={"border border-dark bg-white text-dark"}>
+        <Card className={"border border-dark bg-white text-dark mt-3"}>
             <Card.Header>
                 <FontAwesomeIcon icon={faUserPlus}/> Add Product
             </Card.Header>
@@ -83,7 +83,7 @@ export default class ProductNewForm extends Component {
               <Form.Label>Product Description</Form.Label>
               <Form.Control name="productDescription" as="textarea" rows={3} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
-                <Button variant="primary" block onClick={this.addHandler}>Add</Button>
+                <Button variant="warning" block onClick={this.addHandler}>Add</Button>
                </Form>
                 </Card.Body>
                 </Card>

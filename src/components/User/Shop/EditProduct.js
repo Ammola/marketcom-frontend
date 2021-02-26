@@ -78,7 +78,7 @@ export default class EditProduct extends Component {
               <Form.Label>Product Description</Form.Label>
               <Form.Control name="productDescription" as="textarea" rows={3} value={this.state.newProduct.productDescription} onChange={this.changeHandler}></Form.Control>
           </Form.Group>
-                <Button variant="primary" block onClick={this.editHandler}>Update</Button>
+                <Button variant="warning" block onClick={this.editHandler}>Update</Button>
                </Form>
                 </Card.Body>
                 </Card>

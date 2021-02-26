@@ -10,7 +10,6 @@ export default class Details extends Component {
             <ProductConsumer>
                 {(value) => {
                     let product = JSON.parse(localStorage.getItem('detailProduct'));
-                    console.log(product.id);
                     let {id, category, productImage, productDescription, productPrice, productName, productColor, inCart} = product;
                     console.log(productColor);
                     return(

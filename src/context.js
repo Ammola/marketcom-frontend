@@ -9,21 +9,26 @@ const ProductContext = React.createContext();
 class ProductProvider extends Component {
     constructor(props) {
         super(props)
-    
+        if (!(localStorage.getItem('cart'))){
+            console.log("true!!!")
+            localStorage.setItem('cart',  JSON.stringify([]));
+        }
         this.state = {
              products: [],
              detailProduct: {},
-             cart: [],
+             cart: JSON.parse(localStorage.getItem('cart')),
              modelOpen: false,
              modelProduct: {},
              cartSubTotal: 0,
              cartTax: 0,
              cartTotal: 0
         }
+        
     }
 
     componentDidMount(){
         this.loadProductList();
+        this.addTotals();
     }
 
     loadProductList = () => {
@@ -50,16 +55,6 @@ class ProductProvider extends Component {
         })
     }
 
-    // setProducts = () => {
-    //     let tempProducts = [];
-    //     this.loadProductList.forEach(item => {
-    //         const singleItem = {...item};
-    //         tempProducts = [...tempProducts,singleItem];
-    //     })
-    //     this.setState(()=>{
-    //         return {products: tempProducts}
-    //     })
-    // }
 
     getItem = (id) => {
         const product = this.state.products.find(item => item.id === id);
@@ -77,20 +72,9 @@ class ProductProvider extends Component {
     }
 
     addToCart = (id) => {
-        // let product = getItem(id);
-        // axios.post(`/marketcom/product/add?shopId=${id}`,product, 
-        // {headers: {'Content-Type': 'application/json',}})
-        // .then(response=>{
-        //     console.log(response)
-        //   })
-        //   .catch(error=>{
-        //     console.log(error);
-        //   })
         let tempProducts = [...this.state.products];
         const index = tempProducts.indexOf(this.getItem(id));
         const product = tempProducts[index];
-        console.log("product from add to cart:    ");
-        console.log(product);
         product.inCart = true;
         product.count = 1;
         const price = product.productPrice;
@@ -104,19 +88,9 @@ class ProductProvider extends Component {
                 console.log(product)
                 console.log("product state after totals:  ")
                 console.log(this.state.products)
+                localStorage.setItem('cart', JSON.stringify(this.state.cart));
         })
     }
-
-    // addHandler=(newProduct,id)=>{
-    //     axios.post(`/marketcom/product/add?shopId=${id}`,newProduct, 
-    //     {headers: {'Content-Type': 'application/json',}})
-    //     .then(response=>{
-    //       console.log(response)
-    //     })
-    //     .catch(error=>{
-    //       console.log(error);
-    //     })
-    //   }
 
     openModel = (id) => {
         const product = this.getItem(id);
@@ -131,22 +105,19 @@ class ProductProvider extends Component {
         })
     }
 
-    productDetail = (id) => {
-        console.log(`Hello from product Details ${id}`);
-    }
-
 increment = (id) =>{
-    let tempCart =[...this.state.cart];
+    let tempCart =[...this.state.cart]
     const selectedProduct = tempCart.find(item=>item.id === id)
-    const index = tempCart.indexOf(selectedProduct);
-    const product = tempCart[index];
-    product.count = product.count +1;
+    const index = tempCart.indexOf(selectedProduct)
+    const product = tempCart[index]
+    product.count = product.count +1
     product.total = product.count * product.productPrice;
     console.log("typeof product.price")
     console.log(typeof product.productPrice)
     this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
     console.log("cart state after increment:  ")
     console.log(this.state.cart)
+    localStorage.setItem('cart', JSON.stringify(this.state.cart))
 }
 
 decrement = (id) => {
@@ -160,6 +131,7 @@ decrement = (id) => {
     }else {
         product.total = product.count * product.productPrice;
         this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
+        localStorage.setItem('cart', JSON.stringify(this.state.cart));
     }
     
 }
@@ -170,6 +142,9 @@ removeItem = (id) => {
 
    tempCart = tempCart.filter(item => item.id !== id);
    const index = tempProducts.indexOf(this.getItem(id));
+   let cart =  JSON.parse(localStorage.getItem('cart'));
+   cart.splice(index, 1);
+   localStorage.setItem('cart', JSON.stringify(cart));
    let removedProduct = tempProducts[index];
    removedProduct.inCart = false;
    removedProduct.count = 0;
@@ -186,17 +161,19 @@ removeItem = (id) => {
 }
 
 clearCart = () => {
+    localStorage.setItem('cart',  JSON.stringify([]));
     this.setState(() => {
         return { cart: []};
     }, () => {
-        // this.setProducts();
         this.addTotals();
     });
 }
 
 addTotals = () => {
+    console.log("call addTotals()")
     let subTotal = 0;
-    this.state.cart.map(item => (subTotal += item.total))
+    let cart =  JSON.parse(localStorage.getItem('cart'));
+    cart.map(item => (subTotal += item.total))
     const tempTax = subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
     const total = subTotal + tax
@@ -223,7 +200,8 @@ addTotals = () => {
                   removeItem: this.removeItem,
                   clearCart: this.clearCart, 
                   getItem: this.getItem, 
-                  loadProductList: this.loadProductList
+                  loadProductList: this.loadProductList, 
+                  addTotals: this.addTotals
               }}>
                   {this.props.children}
               </ProductContext.Provider>                
