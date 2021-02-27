@@ -20,7 +20,7 @@ export default class profile extends Component {
             infouser:props.user1,
             user2:''
          }
-         this.load=this.load.bind(this);
+        //  this.load=this.load.bind(this);
 
     }
     async componentDidMount() {
@@ -28,6 +28,7 @@ export default class profile extends Component {
              this.load();
             
     }
+    
      load(infouser){
         axios.get("/marketcom/user/profile",
         {
@@ -72,11 +73,12 @@ export default class profile extends Component {
   </Card.Body>
 </Card>:null}
 </CardGroup>
-               
+<Switch>
                <Route  path="/editprofile"  component={() =><Editprofile usera={this.state.user2}/>}/>
                <Route  path="/shop"  component={() =><Shop usera={this.state.user2} />}/>
                
-
+               
+</Switch>
 
      
       </Router>

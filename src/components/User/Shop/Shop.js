@@ -16,8 +16,13 @@ export default class shop extends Component {
         super(props);
         this.state ={
             newUser : props.usera,
-            newShop:{}
+            newShop:{},
+            viewForm: false,
+            viewEditForm:false,
+            hide:false
         }
+this.showForm=this.showForm.bind(this);
+this.showrditForm=this.showrditForm.bind(this)
 
     }
     async componentDidMount() {
@@ -40,6 +45,64 @@ export default class shop extends Component {
             console.log(error);
         })
     }
+
+    showForm(){
+      this.setState({
+        viewForm: true,
+        hide:true
+
+
+      })
+
+    }
+    showrditForm(){
+      this.setState({
+        viewEditForm: true
+
+      })
+
+    }
+
+    addShop=(shop)=>{
+      axios.post(`marketcom/shop/add?id=${this.state.newUser.id}`,shop, {headers: {'Content-Type': 'application/json',"Authorization": "Bearer " + localStorage.getItem("token")}})
+      .then(response=>{
+        console.log(response)
+        this.loadshHandler();
+
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    }
+    editShop=(shop)=>{
+      axios.put(`marketcom/shop/edit?userId=${this.state.newUser.id}`,shop,
+      {
+          headers: {
+              "Authorization": "Bearer " + localStorage.getItem("token")
+          }})
+      .then(response=>{
+        console.log(response)
+        this.loadshHandler();
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+    }
+
+    deleteshop= (userId,id) =>{
+      axios.delete(`/marketcom/shop/delete?userId=${this.state.newUser.id}`,{
+          headers: {
+              "Authorization": "Bearer " + localStorage.getItem("token")
+          }
+      })
+      .then(response=>{
+          console.log(response);
+          this.loadshHandler();
+        })
+        .catch(error=>{
+          console.log(error);
+        })
+      }
     
   render() {
     return (
@@ -55,23 +118,23 @@ export default class shop extends Component {
       <tbody>
     <tr>
       <td>{this.state.newShop.shopName}</td>
-      <td> {(this.state.newShop.id ==="0") ?
-            null:<Link  to={"addShop"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Add Shop</Link>}
-            <Link  to={"editShop"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Edit Shop</Link>
-            <Link  to={"deleteShop"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Delete Shop</Link>
-            <Link  to={"shopproduct"} className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Proudct</Link></td>
+      <td> 
+        
+            {(this.state.newShop.id ==null&&!this.state.hide) ?
+             <Button variant="primary" block className="btn btn-warning mr-1" onClick={this.showForm}>Add Shop</Button> :null} 
+             <Button variant="primary" block className="btn btn-warning mr-1" onClick={this.showrditForm}>Edit Shop</Button>  
+            <Button variant="primary" block className="btn btn-warning mr-1" onClick={()=>this.deleteshop(this.state.newShop.id)}>Delete</Button>           
+       
+             <Link  to={"shopproduct"} variant="primary" block  className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Proudct</Link></td>
 
       </tr>
       </tbody>
       </Table>
-            
-           
-            <Route  path="/addShop"  component={() =><Addshop usera={this.state.newUser}/>}/>
-            <Route  path="/editShop"  component={() =><Editshop shops={this.state.newShop}/>}/>
-            <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
+      {(this.state.viewForm) ?  <Addshop addShop={this.addShop}/>:null}
+      {(this.state.viewEditForm) ?<Editshop shops={this.state.newShop} editShop={this.editShop}/>:null}
 
-            <Route  path="/deleteShop"  component={() =><Deleteshop shops={this.state.newShop} userd={this.state.newUser}/>}/>
-            {/* <button onClick={()=>this.deleteshop(this.state.newShop.id)}>Delete</button> */}
+         {/* <Route  path="/editShop"  component={() =><Editshop shops={this.state.newShop} rendrr={this.loadshHandler}/>}/> */}
+          <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
       </Router>
     )
   }
