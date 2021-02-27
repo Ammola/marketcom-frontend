@@ -27,7 +27,7 @@ class ProductProvider extends Component {
 
     componentDidMount(){
         this.loadProductList();
-        this.addTotals();
+        //this.addTotals();
         console.log("products from didMount:   ")
         console.log(this.state.products)
     }
@@ -47,38 +47,33 @@ class ProductProvider extends Component {
             console.log(tempProducts)
             let tempCart = JSON.parse(localStorage.getItem('cart'))
             let newProducts = tempProducts.map(function(el) {
-                let o = Object.assign({}, el)
-                if((tempCart.length > 0) && (tempProducts.some(el => el.id === tempCart[0].id))){
+                if((tempCart.length > 0) && (el.id === tempCart[0].id)){
+                    console.log("tempProducts.some(el => el.id === tempCart[0].id)")
+                    console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
                     console.log("tempCart.length")
                     console.log(tempCart.length)
                     console.log("el.id:    ")
                     console.log(el.id)
                     console.log("tempCart[0].id:    ")
                     console.log(tempCart[0].id)
-                    console.log("true!!")
-                    o.inCart = true
-                    o.count = tempCart[0].count
-                    o.total = tempCart[0].total
+                    el.inCart = true
+                    el.count = tempCart[0].count
+                    el.total = tempCart[0].total
                     tempCart.splice(0,1)
                     console.log("tempCart after splice: ")
                     console.log(tempCart)
                 } else {
-                    o.inCart = false
-                    o.count = 0
-                    o.total = 0
+                    el.inCart = false
+                    el.count = 0
+                    el.total = 0
                 }
-                return o
+                return el
               })
               this.setState(()=>{
                 return {products: newProducts}
             })
             console.log("products from loadProducts after loop:   ")
             console.log(this.state.products)
-
-            // let id = localStorage.getItem('productDetailId');
-            // id = parseInt(id);
-            // const myProduct = this.getItem(id);
-            // console.log(myProduct);
         })
         .catch(error =>{
             console.log("Error retreiving products!!");
