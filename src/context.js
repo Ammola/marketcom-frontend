@@ -27,7 +27,7 @@ class ProductProvider extends Component {
 
     componentDidMount(){
         this.loadProductList();
-        //this.addTotals();
+        this.addTotals();
         console.log("products from didMount:   ")
         console.log(this.state.products)
     }
@@ -48,20 +48,20 @@ class ProductProvider extends Component {
             let tempCart = JSON.parse(localStorage.getItem('cart'))
             let newProducts = tempProducts.map(function(el) {
                 if((tempCart.length > 0) && (el.id === tempCart[0].id)){
-                    console.log("tempProducts.some(el => el.id === tempCart[0].id)")
-                    console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
-                    console.log("tempCart.length")
-                    console.log(tempCart.length)
-                    console.log("el.id:    ")
-                    console.log(el.id)
-                    console.log("tempCart[0].id:    ")
-                    console.log(tempCart[0].id)
+                    // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
+                    // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
+                    // console.log("tempCart.length")
+                    // console.log(tempCart.length)
+                    // console.log("el.id:    ")
+                    // console.log(el.id)
+                    // console.log("tempCart[0].id:    ")
+                    // console.log(tempCart[0].id)
                     el.inCart = true
                     el.count = tempCart[0].count
                     el.total = tempCart[0].total
                     tempCart.splice(0,1)
-                    console.log("tempCart after splice: ")
-                    console.log(tempCart)
+                    // console.log("tempCart after splice: ")
+                    // console.log(tempCart)
                 } else {
                     el.inCart = false
                     el.count = 0
@@ -108,12 +108,6 @@ class ProductProvider extends Component {
         this.setState(() =>{
             return {cart:[...this.state.cart, product]}
         }, ()=>{this.addTotals()
-                // console.log("cart after totals:  ")
-                // console.log(this.state.cart)
-                // console.log("product after totals:  ")
-                // console.log(product)
-                // console.log("product state after totals:  ")
-                // console.log(this.state.products)
                 localStorage.setItem('cart', JSON.stringify(this.state.cart));
         })
     }
@@ -167,29 +161,27 @@ removeItem = (id) => {
    let tempProducts = [...this.state.products]
    let tempCart =  JSON.parse(localStorage.getItem('cart'))
    
-   console.log("tempProducts:   ")
-   console.log( tempProducts)
-
-   console.log("tempCart:   ")
-   console.log(tempCart)
-   
-   console.log("id:   ")
-   console.log(id)
+//    console.log("tempProducts:   ")
+//    console.log( tempProducts)
+//    console.log("tempCart:   ")
+//    console.log(tempCart)
+//    console.log("id:   ")
+//    console.log(id)
 
    const index = tempCart.indexOf(this.getItem(id))
-   console.log("index of the item to be removed:   "+index)
+//    console.log("index of the item to be removed:   "+index)
 
    tempCart = tempCart.filter(item => item.id !== id)
 
-   console.log("tempCart after filter:   ")
-   console.log(tempCart)
-
+//    console.log("tempCart after filter:   ")
+//    console.log(tempCart)
    //let cart =  JSON.parse(localStorage.getItem('cart'))
    //console.log("cart before splice:  ")
    //console.log(cart)
    //tempCart.splice(index, 1)
    //console.log("cart after splice:  ")
    //console.log(cart)
+   
    localStorage.setItem('cart', JSON.stringify(tempCart))
    const productIndex = tempProducts.indexOf(this.getItem(id))
    let removedProduct = tempProducts[productIndex]

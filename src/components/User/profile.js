@@ -69,7 +69,7 @@ export default class profile extends Component {
   <Card.Img variant="top" src={img2} />
   <Card.Body>
     <Card.Title>Shop Option</Card.Title>
-               <Link  to={"shop"} className="btn btn-warning"><FontAwesomeIcon icon={faSignInAlt} /> Shop</Link>
+               <Link  to="/shop" block="true" className="btn btn-warning"><FontAwesomeIcon icon={faSignInAlt} /> Shop</Link>
   </Card.Body>
 </Card>:null}
 </CardGroup>

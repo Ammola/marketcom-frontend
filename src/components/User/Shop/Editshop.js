@@ -41,7 +41,7 @@ export default class Editshop extends Component {
       <div>
         <Row className="justify-content-md-center">
        {successMessage}
-           {(!this.state.isEdit) ? 
+          
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
                 <Card.Header>
@@ -52,12 +52,12 @@ export default class Editshop extends Component {
                   <Form.Label>Shop Name</Form.Label>
                   <Form.Control type="text" name="shopName" value={this.state.newshop.shopName} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
-              <Link to="/profile" className="nav-link">
-                    <Button variant="primary" block  onClick={this.editHandler}>Update</Button>
+              <Link  to="/" className="nav-link">
+                    <Button variant="warning" block  onClick={this.editHandler}>Update</Button>
                     </Link>
               </Card.Body>
               </Card>
-              </Col>:null}
+              </Col>
               </Row>
       </div>
     )

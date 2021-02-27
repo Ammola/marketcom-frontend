@@ -9,7 +9,7 @@ export default function CartTotals({value, history}) {
     console.log("CartTotals component");
     useEffect(() => {
         value.addTotals()
-      });
+      },[]);
     return (
         <>
         <div className="container">
