@@ -27,7 +27,7 @@ class ProductProvider extends Component {
 
     componentDidMount(){
         this.loadProductList();
-        this.addTotals();
+        //this.addTotals();
         console.log("products from didMount:   ")
         console.log(this.state.products)
     }
@@ -38,16 +38,36 @@ class ProductProvider extends Component {
             this.setState(()=>{
                         return {products: response.data}
                     })
-            console.log("products from loadProducts:   ")
-            console.log(this.state.products)
-            console.log("Cart from loadProducts:   ")
-            console.log(this.state.cart)
+            // console.log("products from loadProducts:   ")
+            // console.log(this.state.products)
+            // console.log("Cart from loadProducts:   ")
+            // console.log(this.state.cart)
             let tempProducts = [...this.state.products]
-            console.log("tempProducts   ")
-            console.log(tempProducts)
+            // console.log("tempProducts   ")
+            // console.log(tempProducts)
             let tempCart = JSON.parse(localStorage.getItem('cart'))
-            let newProducts = tempProducts.map(function(el) {
-                if((tempCart.length > 0) && (el.id === tempCart[0].id)){
+            let newProducts = tempProducts.map(
+                function(el) {
+                if(tempCart.length > 0){ 
+                if (tempProducts.some(el => el.id === tempCart[0].id)){
+                    let elemntFound = tempProducts.find(x => x.id === tempCart[0].id)
+                    // console.log("if is TRUE")
+                    // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
+                    // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
+                    // console.log("tempCart.length")
+                    // console.log(tempCart.length)
+                    // console.log("el.id:    ")
+                    // console.log(elemntFound)
+                    // console.log("tempCart[0].id:    ")
+                    // console.log(tempCart[0].id)
+                    elemntFound.inCart = true
+                    elemntFound.count = tempCart[0].count
+                    elemntFound.total = tempCart[0].total
+                    tempCart.splice(0,1)
+                    // console.log("tempCart after splice: ")
+                    // console.log(tempCart)
+                } else {
+                    // console.log("if is FALSE")
                     // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
                     // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
                     // console.log("tempCart.length")
@@ -56,17 +76,11 @@ class ProductProvider extends Component {
                     // console.log(el.id)
                     // console.log("tempCart[0].id:    ")
                     // console.log(tempCart[0].id)
-                    el.inCart = true
-                    el.count = tempCart[0].count
-                    el.total = tempCart[0].total
-                    tempCart.splice(0,1)
-                    // console.log("tempCart after splice: ")
-                    // console.log(tempCart)
-                } else {
                     el.inCart = false
                     el.count = 0
                     el.total = 0
                 }
+            }
                 return el
               })
               this.setState(()=>{
@@ -108,6 +122,7 @@ class ProductProvider extends Component {
         this.setState(() =>{
             return {cart:[...this.state.cart, product]}
         }, ()=>{this.addTotals()
+                console.log("ADD TO CART")
                 localStorage.setItem('cart', JSON.stringify(this.state.cart));
         })
     }
@@ -181,7 +196,7 @@ removeItem = (id) => {
    //tempCart.splice(index, 1)
    //console.log("cart after splice:  ")
    //console.log(cart)
-   
+
    localStorage.setItem('cart', JSON.stringify(tempCart))
    const productIndex = tempProducts.indexOf(this.getItem(id))
    let removedProduct = tempProducts[productIndex]
@@ -202,14 +217,14 @@ removeItem = (id) => {
 clearCart = () => {
     localStorage.setItem('cart',  JSON.stringify([]));
     let tempProducts = [...this.state.products]
-    console.log("tempProducts before the loop:   ")
-    console.log(tempProducts)
+    // console.log("tempProducts before the loop:   ")
+    // console.log(tempProducts)
     tempProducts.forEach(function(obj) {
         if (obj.inCart) {
             obj.inCart = false        }
     });
-    console.log("tempProducts after the loop:   ")
-    console.log(tempProducts)
+    // console.log("tempProducts after the loop:   ")
+    // console.log(tempProducts)
     this.setState(() => {
         return { cart: [], 
             products:[...tempProducts] };

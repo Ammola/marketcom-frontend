@@ -17,8 +17,7 @@ export default class Editshop extends Component {
             successMessage: null
         }
     }
-    editHandler =(event) =>{
-      event.preventDefault()
+    editHandler =() =>{
       this.props.editShop(this.state.newshop);
       this.setState({
         isEdit:true,
@@ -52,8 +51,8 @@ export default class Editshop extends Component {
                   <Form.Label>Shop Name</Form.Label>
                   <Form.Control type="text" name="shopName" value={this.state.newshop.shopName} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
-              <Link  to="/" className="nav-link">
-                    <Button variant="warning" block  onClick={this.editHandler}>Update</Button>
+              <Link  to={"/"}className="nav-link">
+                    <Button variant="warning" block  onClick={()=>this.editHandler()}>Update</Button>
                     </Link>
               </Card.Body>
               </Card>

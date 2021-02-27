@@ -133,7 +133,6 @@ this.showrditForm=this.showrditForm.bind(this)
       {(this.state.viewForm) ?  <Addshop addShop={this.addShop}/>:null}
       {(this.state.viewEditForm) ?<Editshop shops={this.state.newShop} editShop={this.editShop}/>:null}
 
-         {/* <Route  path="/editShop"  component={() =><Editshop shops={this.state.newShop} rendrr={this.loadshHandler}/>}/> */}
           <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
       </Router>
     )

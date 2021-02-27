@@ -109,6 +109,7 @@ export default class editProfile extends Component {
                   <Form.Label>ZipCode</Form.Label>
                   <Form.Control type="text" name="zipCode" value={this.state.newUser.zipCode} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
+              
                     <Link to="/profile" className="nav-link">
                     <Button variant="warning" block onClick={()=>this.editrHandler(this.state.newUser)}>Update</Button>
                     </Link>
