@@ -125,16 +125,16 @@ export default class Productpro extends Component {
     )
     
 
-                {/* <ul>
-                    {this.state.newProudct.map((product, index) =>
-                    <div  key={index}>
-                    <li>{this.state.product.id}</li>
-                    </div>)}
-                    </ul> */}
-          {/* <Link  to={"addProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Product</Link>
-          <Link  to={"editProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Product</Link> */}
-          {/* <Route  path="/addProduct"  component={() =><ProductNewForm shops={this.state.shop}/>}/>
-          <Route  path="/editProduct"  component={() =><EditProduct pro={this.state.newProudct}/>}/> */}
+        //         {/* <ul>
+        //             {this.state.newProudct.map((product, index) =>
+        //             <div  key={index}>
+        //             <li>{this.state.product.id}</li>
+        //             </div>)}
+        //             </ul> */}
+        //   {/* <Link  to={"addProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Product</Link>
+        //   <Link  to={"editProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Product</Link> */}
+        //   {/* <Route  path="/addProduct"  component={() =><ProductNewForm shops={this.state.shop}/>}/>
+        //   <Route  path="/editProduct"  component={() =><EditProduct pro={this.state.newProudct}/>}/> */}
     
     
     

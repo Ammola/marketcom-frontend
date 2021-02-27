@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PayPalButton from './PayPalButton'
 
@@ -7,6 +7,9 @@ import PayPalButton from './PayPalButton'
 export default function CartTotals({value, history}) {
     const{cartSubTotal,cartTax,cartTotal,clearCart} = value;
     console.log("CartTotals component");
+    useEffect(() => {
+        value.addTotals()
+      });
     return (
         <>
         <div className="container">

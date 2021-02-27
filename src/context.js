@@ -10,7 +10,6 @@ class ProductProvider extends Component {
     constructor(props) {
         super(props)
         if (!(localStorage.getItem('cart'))){
-            console.log("true!!!")
             localStorage.setItem('cart',  JSON.stringify([]));
         }
         this.state = {
@@ -28,26 +27,53 @@ class ProductProvider extends Component {
 
     componentDidMount(){
         this.loadProductList();
-        this.addTotals();
+        //this.addTotals();
+        console.log("products from didMount:   ")
+        console.log(this.state.products)
     }
 
     loadProductList = () => {
         axios.get("/marketcom/product/indexall")
              .then(response =>{
-            console.log("response:   ")
-            console.log(response)
             this.setState(()=>{
                         return {products: response.data}
                     })
-
-            console.log("products from loadProductList:  ");
-            console.log(this.state.products);
-            let id = localStorage.getItem('productDetailId');
-            console.log("id from local storage: "+id); 
-            id = parseInt(id);
-            console.log("product from local storage: "); 
-            const myProduct = this.getItem(id);
-            console.log(myProduct);
+            console.log("products from loadProducts:   ")
+            console.log(this.state.products)
+            console.log("Cart from loadProducts:   ")
+            console.log(this.state.cart)
+            let tempProducts = [...this.state.products]
+            console.log("tempProducts   ")
+            console.log(tempProducts)
+            let tempCart = JSON.parse(localStorage.getItem('cart'))
+            let newProducts = tempProducts.map(function(el) {
+                if((tempCart.length > 0) && (el.id === tempCart[0].id)){
+                    console.log("tempProducts.some(el => el.id === tempCart[0].id)")
+                    console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
+                    console.log("tempCart.length")
+                    console.log(tempCart.length)
+                    console.log("el.id:    ")
+                    console.log(el.id)
+                    console.log("tempCart[0].id:    ")
+                    console.log(tempCart[0].id)
+                    el.inCart = true
+                    el.count = tempCart[0].count
+                    el.total = tempCart[0].total
+                    tempCart.splice(0,1)
+                    console.log("tempCart after splice: ")
+                    console.log(tempCart)
+                } else {
+                    el.inCart = false
+                    el.count = 0
+                    el.total = 0
+                }
+                return el
+              })
+              this.setState(()=>{
+                return {products: newProducts}
+            })
+            console.log("products from loadProducts after loop:   ")
+            console.log(this.state.products)
         })
         .catch(error =>{
             console.log("Error retreiving products!!");
@@ -58,7 +84,7 @@ class ProductProvider extends Component {
 
     getItem = (id) => {
         const product = this.state.products.find(item => item.id === id);
-        return product;
+        return product; 
     }
     
 
@@ -82,12 +108,12 @@ class ProductProvider extends Component {
         this.setState(() =>{
             return {cart:[...this.state.cart, product]}
         }, ()=>{this.addTotals()
-                console.log("cart after totals:  ")
-                console.log(this.state.cart)
-                console.log("product after totals:  ")
-                console.log(product)
-                console.log("product state after totals:  ")
-                console.log(this.state.products)
+                // console.log("cart after totals:  ")
+                // console.log(this.state.cart)
+                // console.log("product after totals:  ")
+                // console.log(product)
+                // console.log("product state after totals:  ")
+                // console.log(this.state.products)
                 localStorage.setItem('cart', JSON.stringify(this.state.cart));
         })
     }
@@ -112,11 +138,11 @@ increment = (id) =>{
     const product = tempCart[index]
     product.count = product.count +1
     product.total = product.count * product.productPrice;
-    console.log("typeof product.price")
-    console.log(typeof product.productPrice)
+    // console.log("typeof product.price")
+    // console.log(typeof product.productPrice)
     this.setState(() => {return{cart:[...tempCart]}}, ()=>{this.addTotals()})
-    console.log("cart state after increment:  ")
-    console.log(this.state.cart)
+    // console.log("cart state after increment:  ")
+    // console.log(this.state.cart)
     localStorage.setItem('cart', JSON.stringify(this.state.cart))
 }
 
@@ -137,18 +163,39 @@ decrement = (id) => {
 }
 
 removeItem = (id) => {
-   let tempProducts = [...this.state.products];
-   let tempCart = [...this.state.cart];
+   console.log("hello from removeItem()")
+   let tempProducts = [...this.state.products]
+   let tempCart =  JSON.parse(localStorage.getItem('cart'))
+   
+   console.log("tempProducts:   ")
+   console.log( tempProducts)
 
-   tempCart = tempCart.filter(item => item.id !== id);
-   const index = tempProducts.indexOf(this.getItem(id));
-   let cart =  JSON.parse(localStorage.getItem('cart'));
-   cart.splice(index, 1);
-   localStorage.setItem('cart', JSON.stringify(cart));
-   let removedProduct = tempProducts[index];
-   removedProduct.inCart = false;
-   removedProduct.count = 0;
-   removedProduct.total = 0;
+   console.log("tempCart:   ")
+   console.log(tempCart)
+   
+   console.log("id:   ")
+   console.log(id)
+
+   const index = tempCart.indexOf(this.getItem(id))
+   console.log("index of the item to be removed:   "+index)
+
+   tempCart = tempCart.filter(item => item.id !== id)
+
+   console.log("tempCart after filter:   ")
+   console.log(tempCart)
+
+   //let cart =  JSON.parse(localStorage.getItem('cart'))
+   //console.log("cart before splice:  ")
+   //console.log(cart)
+   //tempCart.splice(index, 1)
+   //console.log("cart after splice:  ")
+   //console.log(cart)
+   localStorage.setItem('cart', JSON.stringify(tempCart))
+   const productIndex = tempProducts.indexOf(this.getItem(id))
+   let removedProduct = tempProducts[productIndex]
+   removedProduct.inCart = false
+   removedProduct.count = 0
+   removedProduct.total = 0
    this.setState(()=>{
        return{
            cart:[...tempCart],
@@ -162,8 +209,18 @@ removeItem = (id) => {
 
 clearCart = () => {
     localStorage.setItem('cart',  JSON.stringify([]));
+    let tempProducts = [...this.state.products]
+    console.log("tempProducts before the loop:   ")
+    console.log(tempProducts)
+    tempProducts.forEach(function(obj) {
+        if (obj.inCart) {
+            obj.inCart = false        }
+    });
+    console.log("tempProducts after the loop:   ")
+    console.log(tempProducts)
     this.setState(() => {
-        return { cart: []};
+        return { cart: [], 
+            products:[...tempProducts] };
     }, () => {
         this.addTotals();
     });
