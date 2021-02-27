@@ -49,32 +49,33 @@ class ProductProvider extends Component {
             let newProducts = tempProducts.map(
                 function(el) {
                 if(tempCart.length > 0){ 
-                if (el.id === tempCart[0].id){
-                    console.log("if is TRUE")
-                    console.log("tempProducts.some(el => el.id === tempCart[0].id)")
-                    console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
-                    console.log("tempCart.length")
-                    console.log(tempCart.length)
-                    console.log("el.id:    ")
-                    console.log(el.id)
-                    console.log("tempCart[0].id:    ")
-                    console.log(tempCart[0].id)
-                    el.inCart = true
-                    el.count = tempCart[0].count
-                    el.total = tempCart[0].total
-                    tempCart.splice(0,1)
-                    console.log("tempCart after splice: ")
-                    console.log(tempCart)
-                } else {
-                    console.log("if is FALSE")
+                if (tempProducts.some(el => el.id === tempCart[0].id)){
+                    let elemntFound = tempProducts.find(x => x.id === tempCart[0].id)
+                    // console.log("if is TRUE")
                     // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
                     // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
-                    console.log("tempCart.length")
-                    console.log(tempCart.length)
-                    console.log("el.id:    ")
-                    console.log(el.id)
-                    console.log("tempCart[0].id:    ")
-                    console.log(tempCart[0].id)
+                    // console.log("tempCart.length")
+                    // console.log(tempCart.length)
+                    // console.log("el.id:    ")
+                    // console.log(elemntFound)
+                    // console.log("tempCart[0].id:    ")
+                    // console.log(tempCart[0].id)
+                    elemntFound.inCart = true
+                    elemntFound.count = tempCart[0].count
+                    elemntFound.total = tempCart[0].total
+                    tempCart.splice(0,1)
+                    // console.log("tempCart after splice: ")
+                    // console.log(tempCart)
+                } else {
+                    // console.log("if is FALSE")
+                    // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
+                    // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
+                    // console.log("tempCart.length")
+                    // console.log(tempCart.length)
+                    // console.log("el.id:    ")
+                    // console.log(el.id)
+                    // console.log("tempCart[0].id:    ")
+                    // console.log(tempCart[0].id)
                     el.inCart = false
                     el.count = 0
                     el.total = 0
