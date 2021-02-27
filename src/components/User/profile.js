@@ -58,7 +58,7 @@ export default class profile extends Component {
   <Card.Img variant="top" src={img1} />
   <Card.Body>
     <Card.Title>Edit Profile</Card.Title>
-    <Link to="/editprofile" className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Profile</Link>
+    <Link to="/editprofile" className="btn btn-warning"><FontAwesomeIcon icon={faSignInAlt} /> Edit Profile</Link>
 
     
   </Card.Body>
@@ -68,7 +68,7 @@ export default class profile extends Component {
   <Card.Img variant="top" src={img2} />
   <Card.Body>
     <Card.Title>Shop Option</Card.Title>
-               <Link  to={"shop"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Shop</Link>
+               <Link  to={"shop"} className="btn btn-warning"><FontAwesomeIcon icon={faSignInAlt} /> Shop</Link>
   </Card.Body>
 </Card>:null}
 </CardGroup>

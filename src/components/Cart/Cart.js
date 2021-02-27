@@ -12,7 +12,15 @@ export default class Cart extends Component {
             <section>
                 <ProductConsumer>
                     {value =>{
+                        let storedCart = localStorage.getItem('cart');
+                        if(storedCart.length > 0 ){
+                        storedCart  = JSON.parse(localStorage.getItem('cart'));
+                        value.cart = storedCart;
+                        }
+                        console.log("value.cart from Cart  :");
+                        console.log(value.cart);
                         const {cart} = value;
+                        
                         if(cart.length>0){
                             return(
                                 <>

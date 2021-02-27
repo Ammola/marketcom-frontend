@@ -28,8 +28,8 @@ export default class Register extends Component {
               successMessage: "Successfully register in!!!",
                 message: null
             });
-           
           }
+
           else {
             this.setState({
               

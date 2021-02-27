@@ -18,8 +18,8 @@ export default class Productshop extends Component {
                         {this.props.productName}
                     </p>
                     <h5 className="text-blue mb-0">
-                        <Button variant="primary" size="sm" block onClick={()=>{this.props.deleteProduct(this.props.id)}}>Delete</Button>
-          <Button variant="primary" size="sm" block onClick={()=>{this.props.editView(this.props.id)}}>Edit</Button>
+                        <Button variant="warning" size="sm" block onClick={()=>{this.props.deleteProduct(this.props.id)}}>Delete</Button>
+          <Button variant="warning" size="sm" block onClick={()=>{this.props.editView(this.props.id)}}>Edit</Button>
                     </h5>
                     </div>          
           </div>
