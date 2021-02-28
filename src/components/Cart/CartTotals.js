@@ -5,8 +5,9 @@ import PayPalButton from './PayPalButton'
 
 
 export default function CartTotals({value, history}) {
-    const{cartSubTotal,cartTax,cartTotal,clearCart} = value;
-    //console.log("CartTotals component");
+    const{cartSubTotal,cartTax,cartTotal,clearCart} = value
+    //const totalUSD = parseInt(cartTotal) * 0.27
+    console.log(typeof cartTotal);
     useEffect(() => {
         value.addTotals()
       },[]);
