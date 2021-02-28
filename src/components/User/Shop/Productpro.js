@@ -8,8 +8,11 @@ import EditProduct from './EditProduct'
 import Productshop from './Productshop'
 import {Card,CardGroup} from 'react-bootstrap';
 import { ProductConsumer } from '../../../context';
+import { Alert } from "react-bootstrap";
 
-
+const styles = {
+    transition: 'all 1s ease-out'
+};
 
 
 export default class Productpro extends Component {
@@ -19,9 +22,19 @@ export default class Productpro extends Component {
             shop : props.shops,
             newProudct:[],
             isEdit: false,
-            clickedProductId : ''
+            clickedProductId : '',
+            successMessage: null,
+            message:null,
+            opacity: 1
+
+
         }
 
+    }
+    onHide() {
+        this.setState({
+            opacity: 0
+        });
     }
     componentDidMount(){
         this.loadProductList();
@@ -40,7 +53,7 @@ export default class Productpro extends Component {
             })
         })
         .catch(error =>{
-            console.log("Error retreiving Authors !!");
+            console.log("Error retreiving Product !!");
             console.log(error);
         })
     }
@@ -51,9 +64,11 @@ export default class Productpro extends Component {
             .then(response=>{
               console.log(response)
               this.loadProductList();
+             
             })
             .catch(error=>{
               console.log(error);
+             
             })
           }
     deleteProduct= (id) =>{
@@ -65,10 +80,18 @@ export default class Productpro extends Component {
             .then(response =>{
                 console.log("Deleted!")
                 this.loadProductList();
+                this.setState({
+                    successMessage: "Successfully Delete Product !!!",
+            
+                  })
             })
             .catch(error =>{
                 console.log("Error Deleting product!")
                 console.log(error)
+                this.setState({
+                    message: "Error Occured. Please try again later!!!",
+            
+                  })
             })
     }
 
@@ -90,12 +113,13 @@ export default class Productpro extends Component {
                 console.log(response);
                 this.loadProductList();
                 this.setState({
-                    isEdit:false
+                    isEdit:false,
                 })
             })
             .catch(error =>{
-                console.log("Error product author");
+                console.log("Error product ");
                 console.log(error)
+               
             })
     }
 
@@ -103,10 +127,17 @@ export default class Productpro extends Component {
 
 
   render() {
+    const message = this.state.message ? (
+        <Alert variant="danger" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.message}</Alert>
+      ) : null;
+    const successMessage = this.state.successMessage ? (
+        <Alert variant="success"style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.successMessage}</Alert>
+      ) : null;
     return (
       
      
       <div>
+           {message} {successMessage}
                 {(!this.state.isEdit) ?    <ProductNewForm  addProduct={this.addProduct} /> : null}
                 <h1 className="col-10 mx-auto text-center text-slanted my-5">Proudct List</h1>
                
@@ -125,17 +156,6 @@ export default class Productpro extends Component {
     )
     
 
-        //         {/* <ul>
-        //             {this.state.newProudct.map((product, index) =>
-        //             <div  key={index}>
-        //             <li>{this.state.product.id}</li>
-        //             </div>)}
-        //             </ul> */}
-        //   {/* <Link  to={"addProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Add Product</Link>
-        //   <Link  to={"editProduct"} className="btn btn-primary"><FontAwesomeIcon icon={faSignInAlt} /> Edit Product</Link> */}
-        //   {/* <Route  path="/addProduct"  component={() =><ProductNewForm shops={this.state.shop}/>}/>
-        //   <Route  path="/editProduct"  component={() =><EditProduct pro={this.state.newProudct}/>}/> */}
-    
     
     
   }

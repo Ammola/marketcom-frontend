@@ -18,7 +18,9 @@ import { Alert } from "react-bootstrap";
 import axios from "axios";
 import Footer from './Home/Footer'
 
-
+const styles = {
+  transition: 'all 1s ease-out'
+};
 
 export default class App extends Component {
   state = {
@@ -26,8 +28,10 @@ export default class App extends Component {
     user: null,
     message: null,
     successMessage: null,
-    infouser:null
+    infouser:null,
+    opacity: 1
   };
+  
   componentDidMount() {
     let token = localStorage.getItem("token");
     if (token != null) {
@@ -77,14 +81,18 @@ export default class App extends Component {
       });
     });
 };
+onHide() {
+  this.setState({
+      opacity: 0
+  });}
 render() {
   const { isAuth } = this.state;
   const { user } = this.state;
   const message = this.state.message ? (
-    <Alert variant="danger">{this.state.message}</Alert>
+    <Alert variant="danger" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible >{this.state.message}</Alert>
   ) : null;
   const successMessage = this.state.successMessage ? (
-    <Alert variant="success">{this.state.successMessage}</Alert>
+    <Alert variant="success" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible >{this.state.successMessage}</Alert>
   ) : null;
   return (
    <>

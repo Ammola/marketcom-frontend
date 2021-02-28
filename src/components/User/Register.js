@@ -8,7 +8,9 @@ import { Alert } from "react-bootstrap";
 
 
 
-
+const styles = {
+  transition: 'all 1s ease-out'
+};
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +20,17 @@ export default class Register extends Component {
     successMessage: null,
          }
     }
+    componentWillUnmount() {
+      // fix Warning: Can't perform a React state update on an unmounted component
+      this.setState = (state,callback)=>{
+          return;
+      };
+  }
+    onHide() {
+      this.setState({
+          opacity: 0
+      });
+  }
     registerHandler=(newUser)=>{
         axios.post("marketcom/user/registration",newUser)
         .then(response=>{
@@ -51,10 +64,10 @@ export default class Register extends Component {
 
   render() {
     const message = this.state.message ? (
-        <Alert variant="danger">{this.state.message}</Alert>
+        <Alert variant="danger" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.message}</Alert>
       ) : null;
       const successMessage = this.state.successMessage ? (
-        <Alert variant="success">{this.state.successMessage}</Alert>
+        <Alert variant="success" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.successMessage}</Alert>
       ) : null;
     return (
         <div>
