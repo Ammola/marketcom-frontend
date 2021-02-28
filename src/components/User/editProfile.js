@@ -4,15 +4,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { Alert } from "react-bootstrap";
 
 export default class editProfile extends Component {
+    
     constructor(props){
         super(props);
         this.state ={
-            newUser : props.usera
+            newUser : props.usera,
+            successMessage: null,
+            message:null
+
         }
     }
-    
+    componentWillUnmount() {
+        // fix Warning: Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
     editrHandler=(newUser)=>{
         axios.put("marketcom/user/editPersonalInfo",newUser,
         {
@@ -21,9 +31,17 @@ export default class editProfile extends Component {
             }})
         .then(response=>{
           console.log(response)
+          this.setState({
+            successMessage: "Successfully Edit Profile !!!",
+    
+          })
         })
         .catch(error=>{
           console.log(error);
+          this.setState({
+            message: "Error Occured. Please try again later!!!",
+          });
+
         })
       }
     changeHandler=(e)=>{
@@ -34,8 +52,17 @@ export default class editProfile extends Component {
         })
     }
   render() {
+    const message = this.state.message ? (
+        <Alert variant="danger">{this.state.message}</Alert>
+      ) : null;
+    const successMessage = this.state.successMessage ? (
+        <Alert variant="success">{this.state.successMessage}</Alert>
+      ) : null;
     return (
+        <>
+            
         <Row className="justify-content-md-center">
+        {message} {successMessage}
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
                 <Card.Header>
@@ -82,6 +109,7 @@ export default class editProfile extends Component {
                   <Form.Label>ZipCode</Form.Label>
                   <Form.Control type="text" name="zipCode" value={this.state.newUser.zipCode} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
+              
                     <Link to="/profile" className="nav-link">
                     <Button variant="warning" block onClick={()=>this.editrHandler(this.state.newUser)}>Update</Button>
                     </Link>
@@ -89,6 +117,7 @@ export default class editProfile extends Component {
                     </Card>
                     </Col>
                     </Row>
+                    </>
     )
   }
 }

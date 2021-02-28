@@ -16,16 +16,6 @@ export default class ProductNewForm extends Component {
         }
     }
 
-    // addHandler=(newProduct,id)=>{
-    //     axios.post(`/marketcom/product/add?shopId=${id}`,newProduct, 
-    //     {headers: {'Content-Type': 'application/json',}})
-    //     .then(response=>{
-    //       console.log(response)
-    //     })
-    //     .catch(error=>{
-    //       console.log(error);
-    //     })
-    //   }
     addHandler =(event) =>{
         event.preventDefault()
 

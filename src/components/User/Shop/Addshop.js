@@ -5,7 +5,7 @@ import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawes
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
+import { Alert } from "react-bootstrap";
 
 
 export default class Addshop extends Component {
@@ -13,18 +13,24 @@ export default class Addshop extends Component {
         super(props);
         this.state ={
             newUser : props.usera,
-            shop:{}
+            shop:{},
+            isAdd:false,
+            successMessage: null,
+            inforMessage: null
+
         }
     }
-    addHandler=(shop,id)=>{
-        axios.post(`marketcom/shop/add?id=${id}`,shop, {headers: {'Content-Type': 'application/json',"Authorization": "Bearer " + localStorage.getItem("token")}})
-        .then(response=>{
-          console.log(response)
-        })
-        .catch(error=>{
-          console.log(error);
-        })
-      }
+    addHandler =(event) =>{
+      event.preventDefault()
+      this.props.addShop(this.state.shop);
+      this.setState({
+        isAdd:true,
+        successMessage: "Successfully Add Shop !!!",
+        inforMessage: "you can only have one shop"
+
+      })
+  }
+   
       changeHandler=(e)=>{
         let temp={...this.state.shop}
     temp[e.target.name]=e.target.value;
@@ -33,8 +39,18 @@ export default class Addshop extends Component {
         })
     }
   render() {
+    const inforMessage = this.state.inforMessage ? (
+      <Alert variant="info">{this.state.inforMessage}</Alert>
+    ) : null;
+    const successMessage = this.state.successMessage ? (
+      <Alert variant="success">{this.state.successMessage}</Alert>
+    ) : null;
+    
     return (
+     
         <Row className="justify-content-md-center">
+                      {inforMessage} {successMessage}
+           {(!this.state.isAdd) ? 
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
                 <Card.Header>
@@ -46,11 +62,12 @@ export default class Addshop extends Component {
                   <Form.Control type="text" name="shopName" onChange={this.changeHandler}></Form.Control>
               </Form.Group>
               <Link to="/profile" className="nav-link">
-                    <Button variant="primary" block  onClick={()=>this.addHandler(this.state.shop,this.state.newUser.id)}>Add</Button>
+                    <Button variant="primary" block  onClick={this.addHandler}>Add</Button>
                     </Link>
               </Card.Body>
               </Card>
               </Col>
+              :null}
               </Row>
     )
   }
