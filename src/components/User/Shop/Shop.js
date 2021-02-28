@@ -89,22 +89,7 @@ this.showrditForm=this.showrditForm.bind(this)
         
       })
     }
-    editShop=(shop)=>{
-      axios.put(`marketcom/shop/edit?userId=${this.state.newUser.id}`,shop,
-      {
-          headers: {
-              "Authorization": "Bearer " + localStorage.getItem("token")
-          }})
-      .then(response=>{
-        console.log(response)
-        this.loadshHandler();
-        
-      })
-      .catch(error=>{
-        console.log(error);
-        
-      })
-    }
+   
 
     deleteshop= (userId,id) =>{
       axios.delete(`/marketcom/shop/delete?userId=${this.state.newUser.id}`,{
@@ -164,7 +149,7 @@ this.showrditForm=this.showrditForm.bind(this)
       </tbody>
       </Table>
       {(this.state.viewForm) ?  <Addshop addShop={this.addShop}/>:null}
-      {(this.state.viewEditForm) ?<Editshop style={{...styles, opacity: this.state.opacity}}shops={this.state.newShop} editShop={this.editShop}/>:null}
+      {(this.state.viewEditForm) ?<Editshop style={{...styles, opacity: this.state.opacity}}shops={this.state.newShop}/>:null}
 
           <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
       </Router>

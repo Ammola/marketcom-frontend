@@ -25,13 +25,20 @@ export default class Editshop extends Component {
           opacity: 0
       });
   }
-    editHandler =() =>{
-      this.props.editShop(this.state.newshop);
-      this.setState({
-        isEdit:true,
-        successMessage: "Successfully Edit Shop !!!",
 
-      })
+  editHandler=(newshop)=>{
+    axios.put("marketcom/shop/edit",newshop,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+          "Authorization": "Bearer " + localStorage.getItem("token")
+      }})
+    .then(response=>{
+      console.log(response)
+    })
+    .catch(error=>{
+      console.log(error);
+    })
   }
       changeHandler=(e)=>{
         let temp={...this.state.newshop}
@@ -48,7 +55,7 @@ export default class Editshop extends Component {
       <div>
                {successMessage}
 
-        <Row className="justify-content-md-center" style={{...styles, opacity: this.state.opacity}}>
+        <Row className="justify-content-md-center" >
           
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
@@ -61,8 +68,8 @@ export default class Editshop extends Component {
                   <Form.Control type="text" name="shopName" value={this.state.newshop.shopName} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
               <Link  to="/"className="nav-link">
-                    <Button variant="warning" block  onClick={()=>this.editHandler()}>Update</Button>
-                    <Button variant="warning" block  onClick={()=>this.onHide()}>Close</Button>
+                    <Button variant="warning" block  onClick={()=>this.editHandler(this.state.newshop)}>Update</Button>
+                    
                     </Link>
               </Card.Body>
               </Card>

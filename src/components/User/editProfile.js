@@ -88,7 +88,7 @@ export default class editProfile extends Component {
               </Form.Group>
               <Form.Group>
                   <Form.Label>Email Address</Form.Label>
-                  <Form.Control type="email" name="emailAddress"value={this.state.newUser.emailAddress} onChange={this.changeHandler}></Form.Control>
+                  <Form.Control type="email" name="emailAddress"value={this.state.newUser.emailAddress} onChange={this.changeHandler} readOnly></Form.Control>
               </Form.Group>
               <Form.Group>
                   <Form.Label>Password</Form.Label>

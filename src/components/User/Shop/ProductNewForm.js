@@ -61,11 +61,11 @@ export default class ProductNewForm extends Component {
                 <Form>
             <Form.Group>
               <Form.Label>Product Name</Form.Label>
-              <Form.Control type="text" name="productName" onChange={this.changeHandler}></Form.Control>
+              <Form.Control type="text" name="productName" onChange={this.changeHandler} required></Form.Control>
           </Form.Group>
           <Form.Group>
                     <Form.Label>Category</Form.Label>
-                    <Form.Control as="select" name="category" onChange={this.changeHandler}>
+                    <Form.Control as="select" name="category" onChange={this.changeHandler} >
                     <option value="">Select Category</option>
                         <option value="men">Men</option>
                         <option value="women">Women</option>
