@@ -130,27 +130,6 @@ export default class Example extends Component {
           console.log(data)
           console.log("details.purchase_units[0].amount ")
           console.log(details.purchase_units[0].amount)
-          
-          // let order = JSON.stringify({
-          //   orderId: data.orderID,
-          //   payerId: data.payerID,
-          //   paymentId: data.paymentID,
-          //   billingToken: data.billingToken,
-          //   facilitatorAccessToken: data.facilitatorAccessToken,
-          //   amount: details.purchase_units[0].amount.value
-          //   })
-          // console.log("order")
-          // console.log(order)
-          // axios.post(`marketcom/order/add?userId=${this.state.newUser.id}`,order, {headers: {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
-          //      .then(response=>{
-          //       console.log("response ");
-          //        console.log(response)
-          //       })
-          //      .catch(error=>{
-          //       console.log("error ");
-          //        console.log(error);
-          //       })
-          //alert("Transaction completed by " + details.payer.name.given_name);
           this.props.addOrder(details, data);
           //this.props.addProductsToOrder();
           this.props.history.push("/");
@@ -158,7 +137,7 @@ export default class Example extends Component {
           let userId = JSON.parse(localStorage.getItem('userId'))
           console.log("userId  ")
           console.log(userId)
-          //return this.props.addOrder(details,data);
+          alert("Transaction completed by " + details.payer.name.given_name);
           //OPTIONAL: Call your server to save the transaction
           // return fetch(`marketcom/order/add?userId=${userId}`, {
           //   method: "post",
