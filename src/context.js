@@ -20,7 +20,8 @@ class ProductProvider extends Component {
              modelProduct: {},
              cartSubTotal: 0,
              cartTax: 0,
-             cartTotal: 0
+             cartTotal: 0,
+             cartTotalUSD: 0
         }
         
     }
@@ -145,7 +146,7 @@ increment = (id) =>{
     const selectedProduct = tempCart.find(item=>item.id === id)
     const index = tempCart.indexOf(selectedProduct)
     const product = tempCart[index]
-    product.count = product.count +1
+    product.count = product.count + 1
     product.total = product.count * product.productPrice;
     // console.log("typeof product.price")
     // console.log(typeof product.productPrice)
@@ -241,11 +242,13 @@ addTotals = () => {
     const tempTax = subTotal * 0.1;
     const tax = parseFloat(tempTax.toFixed(2));
     const total = subTotal + tax
+    const totalUSD = Math.round(total * 0.27)
     this.setState(()=>{
         return{
             cartSubTotal: subTotal,
             cartTax: tax,
-            cartTotal: total
+            cartTotal: total, 
+            cartTotalUSD: totalUSD
         }
     })
 }

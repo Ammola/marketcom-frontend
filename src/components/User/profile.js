@@ -36,14 +36,18 @@ export default class profile extends Component {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }})
         .then(response =>{
+          console.log("profile response")
             console.log(response)
+            if (!(localStorage.getItem('userId'))){
+              localStorage.setItem('userId',  JSON.stringify(response.data.id));
+          }
             this.setState({
               infouser: response.data,
               user2:response.data,
             })
         })
         .catch(error =>{
-            console.log("Error retreiving Authors !!");
+            console.log("Error retreiving profile !!");
             console.log(error);
         })
     }

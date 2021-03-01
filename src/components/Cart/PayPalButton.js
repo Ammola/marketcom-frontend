@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 // import PaypalExpressBtn from 'react-paypal-express-checkout';
  
 // export default class MyApp extends React.Component {
@@ -54,22 +55,61 @@ export default class Example extends Component {
   render() {
     return (
       <PayPalButton
-        amount={this.props.total}
+        amount={this.props.totalUSD}
         currency='USD'
         // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
         onSuccess={(details, data) => {
-          alert("Transaction completed by " + details.payer.name.given_name);
+          console.log("details:  ")
+          console.log(details)
+          console.log("data:  ")
+          console.log(data)
+          
+          // let order = {
+          //   "orderId": data.orderID,
+          //   "payerId": data.payerID,
+          //   "paymentId": data.paymentID,
+          //   "billingToken": data.billingToken,
+          //   "facilitatorAccessToken": data.facilitatorAccessToken
+          // }
+          // console.log("order")
+          // console.log(order)
+          // axios.post(`marketcom/order/add?userId=${this.state.newUser.id}`,order, {headers: {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
+          //      .then(response=>{
+          //       console.log("response ");
+          //        console.log(response)
+          //       })
+          //      .catch(error=>{
+          //       console.log("error ");
+          //        console.log(error);
+          //       })
+          //alert("Transaction completed by " + details.payer.name.given_name);
           this.props.clearCart();
           this.props.history.push("/");
+          let userId = JSON.parse(localStorage.getItem('userId'))
+          console.log("userId  ")
+          console.log(userId)
 
           // OPTIONAL: Call your server to save the transaction
-          return fetch("/paypal-transaction-complete", {
+          return fetch(`marketcom/order/add?userId=${userId}`, {
             method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem("token")
+            },
             body: JSON.stringify({
-              orderID: data.orderID
-            })
-          });
-        }}
+            orderId: data.orderID,
+            payerId: data.payerID,
+            paymentId: data.paymentID,
+            billingToken: data.billingToken,
+            facilitatorAccessToken: data.facilitatorAccessToken
+            }), 
+            
+          });  
+        }
+      }
+      options={{
+        clientId: "AUDgSDc8O2xcFn4Iw8Hmk5eBcgETPqrVQqHWHoPgcZein8MvTGy9H10PXMfbnzb-pBMtNmvKpQDMBMoG"
+      }}
       />
     );
   }
