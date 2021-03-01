@@ -77,6 +77,8 @@ this.showrditForm=this.showrditForm.bind(this)
     }
 
     addShop=(shop)=>{
+      console.log("shop")
+      console.log(shop)
       axios.post(`marketcom/shop/add?id=${this.state.newUser.id}`,shop, {headers: {'Content-Type': 'application/json',"Authorization": "Bearer " + localStorage.getItem("token")}})
       .then(response=>{
         console.log(response)
