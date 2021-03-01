@@ -5,7 +5,7 @@ import PayPalButton from './PayPalButton'
 
 
 export default function CartTotals({value, history}) {
-    const{cartSubTotal,cartTax,cartTotal,clearCart, cartTotalUSD} = value
+    const{cartSubTotal,cartTax,cartTotal,clearCart, cartTotalUSD, addOrder} = value
     //const totalUSD = parseInt(cartTotal) * 0.27
     console.log("cartTotalUSD: "+cartTotalUSD);
     useEffect(() => {
@@ -40,7 +40,7 @@ export default function CartTotals({value, history}) {
                         </span>
                         <strong>SR {cartTotal}</strong>
                     </h5>
-                    <PayPalButton total={cartTotal} clearCart={clearCart} history={history} totalUSD = {cartTotalUSD}/>
+                    <PayPalButton total={cartTotal} clearCart={clearCart} history={history} totalUSD = {cartTotalUSD} addOrder={addOrder}/>
 
                 </div>
             </div>

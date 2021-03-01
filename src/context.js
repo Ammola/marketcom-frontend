@@ -101,7 +101,76 @@ class ProductProvider extends Component {
         const product = this.state.products.find(item => item.id === id);
         return product; 
     }
-    
+
+    addOrder = (details, data) => {
+        const params = JSON.stringify({
+            "orderId": data.orderID,
+            "payerId": data.payerID,
+            "paymentId": data.paymentID,
+            "billingToken": "ammola",
+            "facilitatorAccessToken": data.facilitatorAccessToken,
+            "amount": details.purchase_units[0].amount.value
+            
+            });
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        const url = `marketcom/order/add?userId=${userId}`
+        axios.post(url, params,{
+
+            "headers": {
+            
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            
+            },
+            
+            })
+            .then(response => {
+
+                console.log(response);
+                
+                })
+                
+                .catch(error => {
+                
+                console.log(error);
+                
+                });
+    }
+
+    addOrderProduct = (details, data) => {
+        const params = JSON.stringify({
+            "orderId": data.orderID,
+            "payerId": data.payerID,
+            "paymentId": data.paymentID,
+            "billingToken": "ammola",
+            "facilitatorAccessToken": data.facilitatorAccessToken,
+            "amount": details.purchase_units[0].amount.value
+            
+            });
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        const url = `marketcom/order/add?userId=${userId}`
+        axios.post(url, params,{
+
+            "headers": {
+            
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            
+            },
+            
+            })
+            .then(response => {
+
+                console.log(response);
+                
+                })
+                
+                .catch(error => {
+                
+                console.log(error);
+                
+                });
+    }
 
     handleDetail = (id) => {
         const product = this.getItem(id);
@@ -268,7 +337,9 @@ addTotals = () => {
                   clearCart: this.clearCart, 
                   getItem: this.getItem, 
                   loadProductList: this.loadProductList, 
-                  addTotals: this.addTotals
+                  addTotals: this.addTotals, 
+                  addOrder: this.addOrder, 
+                  addOrderProduct: this.addOrderProduct
               }}>
                   {this.props.children}
               </ProductContext.Provider>                
