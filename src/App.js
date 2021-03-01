@@ -106,6 +106,7 @@ render() {
        <Route path="/login"  component={() => isAuth ? <ProductList/> :<Login login={this.loginHandler}/>}/>
        <Route exact path="/profile"  component={()=> isAuth ? <Profile  user1={this.state.user}/>:null}/>
        
+       
        <Route component={Default}/>
      </Switch>
      <Footer/>

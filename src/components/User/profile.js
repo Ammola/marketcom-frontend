@@ -78,8 +78,8 @@ export default class profile extends Component {
 </Card>:null}
 </CardGroup>
 <Switch>
-               <Route  path="/editprofile"  component={() =><Editprofile usera={this.state.user2}/>}/>
-               <Route  path="/shop"  component={() =><Shop usera={this.state.user2} />}/>
+               <Route exact path="/editprofile"  component={() =><Editprofile usera={this.state.user2}/>}/>
+               <Route exact path="/shop"  component={() =><Shop usera={this.state.user2} />}/>
                
                
 </Switch>

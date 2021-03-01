@@ -8,6 +8,7 @@ import { Alert } from "react-bootstrap";
 
 
 
+
 const styles = {
   transition: 'all 1s ease-out'
 };
@@ -18,6 +19,7 @@ export default class Register extends Component {
             newUser:{},
             message: null,
     successMessage: null,
+    validated:false
          }
     }
     componentWillUnmount() {
@@ -32,28 +34,54 @@ export default class Register extends Component {
       });
   }
     registerHandler=(newUser)=>{
+    if (!this.valid()) {
+        alert("Passwords don't match");
+    } else {
         axios.post("marketcom/user/registration",newUser)
         .then(response=>{
           console.log(response)
           if (response.data != null) {
             this.setState({
-             
               successMessage: "Successfully register in!!!",
                 message: null
             });
           }
-
           else {
             this.setState({
-              
               message: "password don't match!!!",
             });
           }
         })
         .catch(error=>{
           console.log(error);
-        })
+        })}
       }
+      valid(){
+        var password_1=document.getElementById('pass1').value;
+        var password_2=document.getElementById('pass2').value;
+        var message=document.getElementById('message');
+
+        if(password_1==''){
+            message.innerHTML='Enter Password';
+            message.style.color="blue";
+
+        }else if(password_2==''){
+            message.innerHTML='Enter Confirm Password';
+             message.style.color="blue";
+        }
+        else if(password_1!=password_2){
+            message.innerHTML='Password Dosent Match';
+             message.style.color="red";
+             return false;
+        }
+        else{
+            message.innerHTML='Password Match';
+            message.style.color="green";
+            
+        }
+        return true;
+
+    }
     changeHandler=(e)=>{
         let temp={...this.state.newUser}
     temp[e.target.name]=e.target.value;
@@ -79,7 +107,7 @@ export default class Register extends Component {
                     <FontAwesomeIcon icon={faUserPlus}/> Register
                 </Card.Header>
                 <Card.Body>
-                    <Form>
+                    <Form onSubmit={()=>this.valid()}>
                 <Form.Group>
                   <Form.Label>First Name</Form.Label>
                   <Form.Control type="text" name="firstName" onChange={this.changeHandler}></Form.Control>
@@ -94,8 +122,15 @@ export default class Register extends Component {
               </Form.Group>
               <Form.Group>
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" name="password" onChange={this.changeHandler}></Form.Control>
+                  <Form.Control type="password" name="password" onChange={this.changeHandler} id="pass1"></Form.Control>
               </Form.Group>
+              <Form.Group>
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control type="password" name="confirmPassword"  onKeyUp={this.valid} id="pass2"></Form.Control>
+              </Form.Group>
+              <p id="message"></p>
+              {/* <div>{this.state.msg.password}</div>
+              <div>{this.state.msg.compassword}</div> */}
               <Form.Group>
                   <Form.Label>Phone Number</Form.Label>
                   <Form.Control type="number" name="phoneNumber" onChange={this.changeHandler}></Form.Control>

@@ -153,7 +153,7 @@ this.showrditForm=this.showrditForm.bind(this)
       {(this.state.viewForm) ?  <Addshop addShop={this.addShop}/>:null}
       {(this.state.viewEditForm) ?<Editshop style={{...styles, opacity: this.state.opacity}}shops={this.state.newShop}/>:null}
 
-          <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
+          <Route  exact path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
       </Router>
     )
   }
