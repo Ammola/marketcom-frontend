@@ -21,8 +21,10 @@ class ProductProvider extends Component {
              cartSubTotal: 0,
              cartTax: 0,
              cartTotal: 0,
-             cartTotalUSD: 0
+             cartTotalUSD: 0,
+             orderId: ""
         }
+        this.addSingleProductToOrder = this.addSingleProductToOrder.bind(this)
         
     }
 
@@ -103,6 +105,7 @@ class ProductProvider extends Component {
     }
 
     addOrder = (details, data) => {
+        const storedCart  = JSON.parse(localStorage.getItem('cart'));
         const params = JSON.stringify({
             "orderId": data.orderID,
             "payerId": data.payerID,
@@ -110,66 +113,63 @@ class ProductProvider extends Component {
             "billingToken": "ammola",
             "facilitatorAccessToken": data.facilitatorAccessToken,
             "amount": details.purchase_units[0].amount.value
-            
             });
         const userId = JSON.parse(localStorage.getItem('userId'))
         const url = `marketcom/order/add?userId=${userId}`
         axios.post(url, params,{
-
             "headers": {
-            
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
-            
             },
             
             })
             .then(response => {
-
                 console.log(response);
-                
+                this.addProductsToOrder(response.data.id)               
                 })
                 
                 .catch(error => {
-                
                 console.log(error);
-                
                 });
     }
 
-    addOrderProduct = (details, data) => {
+    addSingleProductToOrder = (product) => {
+        console.log("addSingleProductToOrder")
         const params = JSON.stringify({
-            "orderId": data.orderID,
-            "payerId": data.payerID,
-            "paymentId": data.paymentID,
-            "billingToken": "ammola",
-            "facilitatorAccessToken": data.facilitatorAccessToken,
-            "amount": details.purchase_units[0].amount.value
-            
+            "quantity": product.count,
+            "productTotal": product.total
             });
-        const userId = JSON.parse(localStorage.getItem('userId'))
-        const url = `marketcom/order/add?userId=${userId}`
+        console.log("product.id")
+        console.log(product.id)
+        console.log("orderId")
+        console.log(this.state.orderId)
+        const url = `marketcom/product-to-order/add?productId=${product.id}&orderId=${this.state.orderId}`
         axios.post(url, params,{
-
             "headers": {
-            
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
-            
             },
             
             })
             .then(response => {
-
                 console.log(response);
                 
                 })
-                
-                .catch(error => {
-                
+            .catch(error => {
                 console.log(error);
-                
                 });
+        }
+
+    addProductsToOrder = (orderId) => {
+        this.setState(()=>{
+            return {orderId: orderId}
+        }) 
+        console.log("addProductsToOrder")
+        console.log(orderId)
+        const storedCart  = JSON.parse(localStorage.getItem('cart'));
+        console.log("storedCart  ")
+        console.log(storedCart)
+        storedCart.forEach(this.addSingleProductToOrder);
     }
 
     handleDetail = (id) => {
@@ -285,7 +285,7 @@ removeItem = (id) => {
 }
 
 clearCart = () => {
-    localStorage.setItem('cart',  JSON.stringify([]));
+    //localStorage.setItem('cart',  JSON.stringify([]));
     let tempProducts = [...this.state.products]
     // console.log("tempProducts before the loop:   ")
     // console.log(tempProducts)
@@ -339,7 +339,8 @@ addTotals = () => {
                   loadProductList: this.loadProductList, 
                   addTotals: this.addTotals, 
                   addOrder: this.addOrder, 
-                  addOrderProduct: this.addOrderProduct
+                  addProductsToOrder: this.addProductsToOrder, 
+                  addSingleProductToOrder: this.addSingleProductToOrder
               }}>
                   {this.props.children}
               </ProductContext.Provider>                

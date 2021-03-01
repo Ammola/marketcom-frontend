@@ -151,9 +151,10 @@ export default class Example extends Component {
           //        console.log(error);
           //       })
           //alert("Transaction completed by " + details.payer.name.given_name);
-          this.props.clearCart();
           this.props.addOrder(details, data);
+          //this.props.addProductsToOrder();
           this.props.history.push("/");
+          this.props.clearCart();
           let userId = JSON.parse(localStorage.getItem('userId'))
           console.log("userId  ")
           console.log(userId)

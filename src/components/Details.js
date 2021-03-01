@@ -56,8 +56,8 @@ export default class Details extends Component {
                                         cart
                                         disable={inCart?true:false}
                                         onClick={()=>{
-                                            value.addToCart(id);
-                                            value.openModel(id);
+                                            if(!inCart) value.addToCart(id);
+                                            else value.openModel(id);
                                         }}
                                         >
                                             {inCart ? "inCart" : "add to cart"}
