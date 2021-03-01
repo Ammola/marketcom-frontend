@@ -63,17 +63,20 @@ export default class Example extends Component {
           console.log(details)
           console.log("data:  ")
           console.log(data)
-          
+          let userId = parseInt(JSON.parse(localStorage.getItem('userId')))
+          console.log("userId  ")
+          console.log(userId)
           // let order = {
           //   "orderId": data.orderID,
           //   "payerId": data.payerID,
           //   "paymentId": data.paymentID,
           //   "billingToken": data.billingToken,
-          //   "facilitatorAccessToken": data.facilitatorAccessToken
+          //   "facilitatorAccessToken": data.facilitatorAccessToken,
+          //   "amount": details.purchase_units.amount.value+" "+details.purchase_units.amount.currency_code
           // }
           // console.log("order")
           // console.log(order)
-          // axios.post(`marketcom/order/add?userId=${this.state.newUser.id}`,order, {headers: {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
+          // axios.post(`marketcom/order/add?userId=${userId}`,order, {headers: {"Content-Type": "application/json","Authorization": "Bearer " + localStorage.getItem("token")}})
           //      .then(response=>{
           //       console.log("response ");
           //        console.log(response)
@@ -82,12 +85,9 @@ export default class Example extends Component {
           //       console.log("error ");
           //        console.log(error);
           //       })
-          //alert("Transaction completed by " + details.payer.name.given_name);
+          alert("Transaction completed by " + details.payer.name.given_name);
           this.props.clearCart();
           this.props.history.push("/");
-          let userId = JSON.parse(localStorage.getItem('userId'))
-          console.log("userId  ")
-          console.log(userId)
 
           // OPTIONAL: Call your server to save the transaction
           return fetch(`marketcom/order/add?userId=${userId}`, {
@@ -101,11 +101,12 @@ export default class Example extends Component {
             payerId: data.payerID,
             paymentId: data.paymentID,
             billingToken: data.billingToken,
-            facilitatorAccessToken: data.facilitatorAccessToken
+            facilitatorAccessToken: data.facilitatorAccessToken,
+            amount: details.purchase_units.amount.value+" "+details.purchase_units.amount.currency_code
             }), 
             
           });  
-        }
+         }
       }
       options={{
         clientId: "AUDgSDc8O2xcFn4Iw8Hmk5eBcgETPqrVQqHWHoPgcZein8MvTGy9H10PXMfbnzb-pBMtNmvKpQDMBMoG"
