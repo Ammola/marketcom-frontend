@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import {Row, Col, Card, Form, InputGroup, FormControl, Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faStore} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
-
+const styles = {
+  transition: 'all 1s ease-out'
+};
 
 export default class Editshop extends Component {
     constructor(props){
@@ -14,16 +16,29 @@ export default class Editshop extends Component {
         this.state ={
             newshop : props.shops,
             isEdit:false,
-            successMessage: null
+            successMessage: null,
+            opacity: 1
         }
     }
-    editHandler =() =>{
-      this.props.editShop(this.state.newshop);
+    onHide() {
       this.setState({
-        isEdit:true,
-        successMessage: "Successfully Edit Shop !!!",
+          opacity: 0
+      });
+  }
 
-      })
+  editHandler=(newshop)=>{
+    axios.put("marketcom/shop/edit",newshop,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+          "Authorization": "Bearer " + localStorage.getItem("token")
+      }})
+    .then(response=>{
+      console.log(response)
+    })
+    .catch(error=>{
+      console.log(error);
+    })
   }
       changeHandler=(e)=>{
         let temp={...this.state.newshop}
@@ -34,25 +49,27 @@ export default class Editshop extends Component {
     }
   render() {
     const successMessage = this.state.successMessage ? (
-      <Alert variant="success">{this.state.successMessage}</Alert>
+      <Alert variant="success" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible >{this.state.successMessage}</Alert>
     ) : null;
     return (
       <div>
-        <Row className="justify-content-md-center">
-       {successMessage}
+               {successMessage}
+
+        <Row className="justify-content-md-center" >
           
         <Col xs={5}>
             <Card className={"border border-dark bg-white text-dark"}>
                 <Card.Header>
-                    <FontAwesomeIcon icon={faUserPlus}/> Edit Shop
+                    <FontAwesomeIcon icon={faStore}/> Edit Shop
                 </Card.Header>
                 <Card.Body>
                 <Form.Group>
                   <Form.Label>Shop Name</Form.Label>
                   <Form.Control type="text" name="shopName" value={this.state.newshop.shopName} onChange={this.changeHandler}></Form.Control>
               </Form.Group>
-              <Link  to={"/"}className="nav-link">
-                    <Button variant="warning" block  onClick={()=>this.editHandler()}>Update</Button>
+              <Link  to="/"className="nav-link">
+                    <Button variant="warning" block  onClick={()=>this.editHandler(this.state.newshop)}>Update</Button>
+                    
                     </Link>
               </Card.Body>
               </Card>

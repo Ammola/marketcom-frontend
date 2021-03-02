@@ -4,7 +4,7 @@ import logo from '../Mylogo.svg'
 import styled from 'styled-components'
 import { ButtonContainer } from './Button' 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUserPlus, faSignInAlt, faSignOutAlt,faAddressCard} from '@fortawesome/free-solid-svg-icons';
+import {faUserPlus, faSignInAlt, faSignOutAlt,faAddressCard,faTshirt} from '@fortawesome/free-solid-svg-icons';
 
 export default class Navbar extends Component {
     constructor(props) {
@@ -44,7 +44,7 @@ export default class Navbar extends Component {
                     { this.props.isAuth1 ? <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faAddressCard} /> Profile</Link>:null}
                     </li>
                     <li>
-                        <Link to="/" className="nav-link">
+                        <Link to="/" className="nav-link"><FontAwesomeIcon icon={faTshirt} />
                             Products
                         </Link>
                     </li>

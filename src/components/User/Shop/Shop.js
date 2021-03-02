@@ -2,13 +2,19 @@ import React, { Component } from 'react'
 import axios from "axios";
 import {Link} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUserPlus, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faTrashAlt, faTshirt, faStore} from '@fortawesome/free-solid-svg-icons';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Addshop from './Addshop'
 import Editshop from './Editshop'
 import Deleteshop from './Deleteshop'
 import {Row, Col, Card, Form, InputGroup, FormControl, Button,CardGroup,Table} from 'react-bootstrap';
 import Productpro from './Productpro'
+import { Alert } from "react-bootstrap";
+
+
+const styles = {
+  transition: 'all 1s ease-out'
+};
 
 
 export default class shop extends Component {
@@ -19,7 +25,10 @@ export default class shop extends Component {
             newShop:{},
             viewForm: false,
             viewEditForm:false,
-            hide:false
+            hide:false,
+            opacity: 1,
+            successMessage: null,
+            message:null,
         }
 this.showForm=this.showForm.bind(this);
 this.showrditForm=this.showrditForm.bind(this)
@@ -41,11 +50,15 @@ this.showrditForm=this.showrditForm.bind(this)
             })
         })
         .catch(error =>{
-            console.log("Error retreiving Authors !!");
+            console.log("Error retreiving shop !!");
             console.log(error);
         })
     }
-
+    onHide() {
+      this.setState({
+          opacity: 0
+      });
+  }
     showForm(){
       this.setState({
         viewForm: true,
@@ -70,26 +83,15 @@ this.showrditForm=this.showrditForm.bind(this)
       .then(response=>{
         console.log(response)
         this.loadshHandler();
+        
 
       })
       .catch(error=>{
         console.log(error);
+        
       })
     }
-    editShop=(shop)=>{
-      axios.put(`marketcom/shop/edit?userId=${this.state.newUser.id}`,shop,
-      {
-          headers: {
-              "Authorization": "Bearer " + localStorage.getItem("token")
-          }})
-      .then(response=>{
-        console.log(response)
-        this.loadshHandler();
-      })
-      .catch(error=>{
-        console.log(error);
-      })
-    }
+   
 
     deleteshop= (userId,id) =>{
       axios.delete(`/marketcom/shop/delete?userId=${this.state.newUser.id}`,{
@@ -100,15 +102,30 @@ this.showrditForm=this.showrditForm.bind(this)
       .then(response=>{
           console.log(response);
           this.loadshHandler();
+          this.setState({
+            successMessage: "Successfully Delete Shop!!!",
+    
+          })
         })
         .catch(error=>{
           console.log(error);
+          this.setState({
+            message: "Error Occured. Please try again later!!!",
+    
+          })
         })
       }
     
   render() {
+    const message = this.state.message ? (
+      <Alert variant="danger" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.message}</Alert>
+    ) : null;
+  const successMessage = this.state.successMessage ? (
+      <Alert variant="success"style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.successMessage}</Alert>
+    ) : null;
     return (
         <Router>
+           {message} {successMessage}
             <Table striped bordered hover variant="blue" style={{  padding:'2%', width: '80%', float: 'none',
     margin: '0 auto' }}>
   <thead>
@@ -123,19 +140,20 @@ this.showrditForm=this.showrditForm.bind(this)
       <td> 
         
             {(this.state.newShop.id ==null&&!this.state.hide) ?
-             <Button variant="primary" block className="btn btn-warning mr-1" onClick={this.showForm}>Add Shop</Button> :null} 
-             <Button variant="primary" block className="btn btn-warning mr-1" onClick={this.showrditForm}>Edit Shop</Button>  
-            <Button variant="primary" block className="btn btn-warning mr-1" onClick={()=>this.deleteshop(this.state.newShop.id)}>Delete</Button>           
-       
-             <Link  to={"shopproduct"} variant="primary" block  className="btn btn-warning mr-1"><FontAwesomeIcon icon={faSignInAlt} /> Proudct</Link></td>
+             <Button variant="primary"  className="btn btn-warning mr-1" onClick={this.showForm}>Add Shop</Button> :null} 
+             <Button variant="primary"  className="btn btn-warning mr-1" onClick={this.showrditForm} > <FontAwesomeIcon icon={faStore}/>Edit Shop</Button>  
+            <Button variant="primary"  className="btn btn-warning mr-1" onClick={()=>this.deleteshop(this.state.newShop.id) }> <FontAwesomeIcon icon={faTrashAlt}/>Delete</Button>           
+            {(this.state.newShop.id !=null) ?
+             <Link  to={"shopproduct"} variant="primary"   className="btn btn-warning mr-1"><FontAwesomeIcon icon={faTshirt} /> Proudct</Link>:null}</td>
+             
 
       </tr>
       </tbody>
       </Table>
       {(this.state.viewForm) ?  <Addshop addShop={this.addShop}/>:null}
-      {(this.state.viewEditForm) ?<Editshop shops={this.state.newShop} editShop={this.editShop}/>:null}
+      {(this.state.viewEditForm) ?<Editshop style={{...styles, opacity: this.state.opacity}}shops={this.state.newShop}/>:null}
 
-          <Route  path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
+          <Route  exact path="/shopproduct"  component={() =><Productpro shops={this.state.newShop}/>}/>
       </Router>
     )
   }

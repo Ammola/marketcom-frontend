@@ -4,27 +4,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faPhone, faEnvelope, faLock, faUndo, faUserPlus, faUser} from "@fortawesome/free-solid-svg-icons";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { Alert } from "react-bootstrap";
+const styles = {
+    transition: 'all 1s ease-out'
+};
 
 export default class EditProduct extends Component {
     constructor(props){
         super(props);
         this.state ={
-            newProduct : props.product
+            newProduct : props.product,
+            successMessage: null,
+            opacity: 1
         }
     }
-    // editHandler=(newProduct)=>{
-    //     axios.put("marketcom/shop/edit",newProduct)
-    //     .then(response=>{
-    //       console.log(response)
-    //     })
-    //     .catch(error=>{
-    //       console.log(error);
-    //     })
-    //   }
+    onHide() {
+        this.setState({
+            opacity: 0
+        });
+    }
       editHandler =(event) =>{
         event.preventDefault()
-
         this.props.editProduct(this.state.newProduct);
+        this.setState({
+            successMessage: "Successfully Edit Product !!!",
+    
+          })
     }
       changeHandler=(e)=>{
         let temp={...this.state.newProduct}
@@ -34,9 +39,12 @@ export default class EditProduct extends Component {
         })
     }
   render() {
+    const successMessage = this.state.successMessage ? (
+        <Alert variant="success" style={{...styles, opacity: this.state.opacity}}onClick={this.onHide.bind(this)}dismissible>{this.state.successMessage}</Alert>
+      ) : null;
     return (
         <div>
-        {/* {message} {successMessage} */}
+       {successMessage}
     <Row className="justify-content-md-center" >
     <Col xs={5}>
         <Card className={"border border-dark bg-white text-dark"}>

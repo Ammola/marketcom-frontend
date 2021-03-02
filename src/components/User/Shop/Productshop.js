@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Card,Button} from 'react-bootstrap';
 import styled from 'styled-components';
+import {faPhone, faEnvelope, faLock, faUndo, faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 export default class Productshop extends Component {
@@ -18,8 +20,11 @@ export default class Productshop extends Component {
                         {this.props.productName}
                     </p>
                     <h5 className="text-blue mb-0">
-                        <Button variant="warning" size="sm" block onClick={()=>{this.props.deleteProduct(this.props.id)}}>Delete</Button>
-          <Button variant="warning" size="sm" block onClick={()=>{this.props.editView(this.props.id)}}>Edit</Button>
+                        <Button variant="warning" size="sm" block onClick={()=>{this.props.deleteProduct(this.props.id)}}>
+                            <FontAwesomeIcon icon={faTrashAlt}/> Delete</Button>
+          <Button variant="warning" size="sm" block onClick={()=>{this.props.editView(this.props.id)}}>
+          <FontAwesomeIcon icon={faEdit}/> Edit</Button>
+          
                     </h5>
                     </div>          
           </div>
