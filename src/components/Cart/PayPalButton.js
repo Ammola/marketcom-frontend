@@ -138,6 +138,7 @@ export default class Example extends Component {
           console.log("userId  ")
           console.log(userId)
           alert("Transaction completed by " + details.payer.name.given_name);
+          //this.props.clearCart();
           //OPTIONAL: Call your server to save the transaction
           // return fetch(`marketcom/order/add?userId=${userId}`, {
           //   method: "post",

@@ -170,6 +170,7 @@ class ProductProvider extends Component {
         console.log("storedCart  ")
         console.log(storedCart)
         storedCart.forEach(this.addSingleProductToOrder);
+        this.clearCart()
     }
 
     handleDetail = (id) => {
