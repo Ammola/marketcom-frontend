@@ -285,7 +285,7 @@ removeItem = (id) => {
 }
 
 clearCart = () => {
-    //localStorage.setItem('cart',  JSON.stringify([]));
+    localStorage.setItem('cart',  JSON.stringify([]));
     let tempProducts = [...this.state.products]
     // console.log("tempProducts before the loop:   ")
     // console.log(tempProducts)

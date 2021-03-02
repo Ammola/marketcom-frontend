@@ -133,7 +133,7 @@ export default class Example extends Component {
           this.props.addOrder(details, data);
           //this.props.addProductsToOrder();
           this.props.history.push("/");
-          this.props.clearCart();
+          //this.props.clearCart();
           let userId = JSON.parse(localStorage.getItem('userId'))
           console.log("userId  ")
           console.log(userId)
