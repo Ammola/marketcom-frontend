@@ -41,6 +41,9 @@ export default class Navbar extends Component {
             :<Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
                      </li>
                     <li className="nav-item ml-5">
+                    { this.props.isAuth1 ? <Link to="/orders" className="nav-link"><FontAwesomeIcon icon={faAddressCard} /> Order</Link>:null}
+                    </li>
+                    <li className="nav-item ml-5">
                     { this.props.isAuth1 ? <Link to="/profile" className="nav-link"><FontAwesomeIcon icon={faAddressCard} /> Profile</Link>:null}
                     </li>
                     <li>

@@ -22,7 +22,8 @@ class ProductProvider extends Component {
              cartTax: 0,
              cartTotal: 0,
              cartTotalUSD: 0,
-             orderId: ""
+             orderId: "", 
+             orders: []
         }
         this.addSingleProductToOrder = this.addSingleProductToOrder.bind(this)
         
@@ -33,6 +34,7 @@ class ProductProvider extends Component {
         //this.addTotals();
         console.log("products from didMount:   ")
         console.log(this.state.products)
+        this.loadOrders();
     }
 
     loadProductList = () => {
@@ -41,44 +43,18 @@ class ProductProvider extends Component {
             this.setState(()=>{
                         return {products: response.data}
                     })
-            // console.log("products from loadProducts:   ")
-            // console.log(this.state.products)
-            // console.log("Cart from loadProducts:   ")
-            // console.log(this.state.cart)
             let tempProducts = [...this.state.products]
-            // console.log("tempProducts   ")
-            // console.log(tempProducts)
             let tempCart = JSON.parse(localStorage.getItem('cart'))
             let newProducts = tempProducts.map(
                 function(el) {
                 if(tempCart.length > 0){ 
                 if (tempProducts.some(el => el.id === tempCart[0].id)){
                     let elemntFound = tempProducts.find(x => x.id === tempCart[0].id)
-                    // console.log("if is TRUE")
-                    // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
-                    // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
-                    // console.log("tempCart.length")
-                    // console.log(tempCart.length)
-                    // console.log("el.id:    ")
-                    // console.log(elemntFound)
-                    // console.log("tempCart[0].id:    ")
-                    // console.log(tempCart[0].id)
                     elemntFound.inCart = true
                     elemntFound.count = tempCart[0].count
                     elemntFound.total = tempCart[0].total
                     tempCart.splice(0,1)
-                    // console.log("tempCart after splice: ")
-                    // console.log(tempCart)
                 } else {
-                    // console.log("if is FALSE")
-                    // console.log("tempProducts.some(el => el.id === tempCart[0].id)")
-                    // console.log(tempProducts.some(el => el.id ===  parseInt(tempCart[0].id)))
-                    // console.log("tempCart.length")
-                    // console.log(tempCart.length)
-                    // console.log("el.id:    ")
-                    // console.log(el.id)
-                    // console.log("tempCart[0].id:    ")
-                    // console.log(tempCart[0].id)
                     el.inCart = false
                     el.count = 0
                     el.total = 0
@@ -94,6 +70,23 @@ class ProductProvider extends Component {
         })
         .catch(error =>{
             console.log("Error retreiving products!!");
+            console.log(error);
+        })
+    }
+
+    loadOrders = () => {
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        axios.get(`/marketcom/order/index?userId=${userId}`)
+             .then(response =>{
+            this.setState(()=>{
+                        return {orders: response.data}
+                    })
+            
+            console.log("orders from loadOrders:   ")
+            console.log(this.state.orders)
+        })
+        .catch(error =>{
+            console.log("Error retreiving orders!!");
             console.log(error);
         })
     }
@@ -341,7 +334,8 @@ addTotals = () => {
                   addTotals: this.addTotals, 
                   addOrder: this.addOrder, 
                   addProductsToOrder: this.addProductsToOrder, 
-                  addSingleProductToOrder: this.addSingleProductToOrder
+                  addSingleProductToOrder: this.addSingleProductToOrder, 
+                  loadOrders: this.loadOrders
               }}>
                   {this.props.children}
               </ProductContext.Provider>                
