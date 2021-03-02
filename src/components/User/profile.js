@@ -9,6 +9,7 @@ import Shop from './Shop/Shop'
 import {Row, Col, Card, Form, InputGroup, FormControl, Button,CardGroup} from 'react-bootstrap';
 import img1 from '../../assets/Male-user-edit-icon.png'
 import img2 from '../../assets/77c366436d8bd35fe8b3ce5b8c66992e.png'
+import Order from './Shop/Order'
 
 
 
@@ -64,6 +65,7 @@ export default class profile extends Component {
   <Card.Body>
     <Card.Title>Edit Profile</Card.Title>
     <Link to="/editprofile" className="btn btn-warning"><FontAwesomeIcon icon={faSignInAlt} /> Edit Profile</Link>
+    <Link  to="/order" block="true" className="btn btn-warning"><FontAwesomeIcon icon={faSignInAlt} /> order</Link>
 
     
   </Card.Body>
@@ -80,6 +82,8 @@ export default class profile extends Component {
 <Switch>
                <Route exact path="/editprofile"  component={() =><Editprofile usera={this.state.user2}/>}/>
                <Route exact path="/shop"  component={() =><Shop usera={this.state.user2} />}/>
+               <Route exact path="/order"  component={() =><Order usera={this.state.user2} />}/>
+
                
                
 </Switch>
