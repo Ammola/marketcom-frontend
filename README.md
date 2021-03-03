@@ -82,3 +82,13 @@ React Bootstrap: https://www.npmjs.com/package/react-bootstrap
 
 
 ## Installation instructions
+### Clone the repo
+`git clone https://git.generalassemb.ly/ammola/marketcom-frontend.git`
+
+### cd to the folder
+
+### in the terminal run 
+`npm install`
+
+`npm start`
+
