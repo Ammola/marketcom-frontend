@@ -78,6 +78,7 @@ class ProductProvider extends Component {
 
     loadOrders = () => {
         const userId = JSON.parse(localStorage.getItem('userId'))
+        if(userId !== null){
         axios.get(`/marketcom/order/index?userId=${userId}`)
             .then(response => {
                 this.setState(() => {
@@ -91,6 +92,7 @@ class ProductProvider extends Component {
                 console.log("Error retreiving orders!!");
                 console.log(error);
             })
+        }
     }
 
     loadOrderProducts = () => {

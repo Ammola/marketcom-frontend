@@ -17,6 +17,7 @@ export default class Navbar extends Component {
     onLogoutHandler = (e) => {
         e.preventDefault();
         localStorage.removeItem("token");
+        //localStorage.removeItem("userId");
         this.setState({
           isAuth2: false,
           user: null,
@@ -37,7 +38,7 @@ export default class Navbar extends Component {
                     <Link to="/register" className="nav-link"><FontAwesomeIcon icon={faUserPlus} /> Register</Link>}
                     </li>
                     <li className="nav-item ml-5">
-                    { this.props.isAuth1 ?  <Link to="/logout" onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</Link>
+                    { this.props.isAuth1 ?  <Link to="/" onClick={this.onLogoutHandler} className="nav-link"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</Link>
             :<Link to="/login" className="nav-link"><FontAwesomeIcon icon={faSignInAlt} /> Login</Link>}
                      </li>
                     <li className="nav-item ml-5">
