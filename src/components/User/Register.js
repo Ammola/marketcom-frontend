@@ -41,6 +41,7 @@ export default class Register extends Component {
         .then(response=>{
           console.log(response)
           if (response.data != null) {
+            alert("Registered successfully!!!");
             this.setState({
               successMessage: "Successfully register in!!!",
                 message: null
