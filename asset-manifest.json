@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/ammola/marketcom-frontend/static/css/main.4dcb5163.chunk.css",
+    "main.js": "/ammola/marketcom-frontend/static/js/main.d6bc685e.chunk.js",
+    "main.js.map": "/ammola/marketcom-frontend/static/js/main.d6bc685e.chunk.js.map",
+    "runtime-main.js": "/ammola/marketcom-frontend/static/js/runtime-main.08d59da4.js",
+    "runtime-main.js.map": "/ammola/marketcom-frontend/static/js/runtime-main.08d59da4.js.map",
+    "static/css/2.150d169a.chunk.css": "/ammola/marketcom-frontend/static/css/2.150d169a.chunk.css",
+    "static/js/2.34ef3a1d.chunk.js": "/ammola/marketcom-frontend/static/js/2.34ef3a1d.chunk.js",
+    "static/js/2.34ef3a1d.chunk.js.map": "/ammola/marketcom-frontend/static/js/2.34ef3a1d.chunk.js.map",
+    "static/js/3.9c509b40.chunk.js": "/ammola/marketcom-frontend/static/js/3.9c509b40.chunk.js",
+    "static/js/3.9c509b40.chunk.js.map": "/ammola/marketcom-frontend/static/js/3.9c509b40.chunk.js.map",
+    "index.html": "/ammola/marketcom-frontend/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/ammola/marketcom-frontend/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.4dcb5163.chunk.css.map": "/ammola/marketcom-frontend/static/css/main.4dcb5163.chunk.css.map",
+    "static/js/2.34ef3a1d.chunk.js.LICENSE.txt": "/ammola/marketcom-frontend/static/js/2.34ef3a1d.chunk.js.LICENSE.txt",
+    "static/media/77c366436d8bd35fe8b3ce5b8c66992e.8bc55efc.png": "/ammola/marketcom-frontend/static/media/77c366436d8bd35fe8b3ce5b8c66992e.8bc55efc.png",
+    "static/media/Male-user-edit-icon.de2428d9.png": "/ammola/marketcom-frontend/static/media/Male-user-edit-icon.de2428d9.png",
+    "static/media/Mylogo.393df3f4.svg": "/ammola/marketcom-frontend/static/media/Mylogo.393df3f4.svg",
+    "static/media/bxco4bjsnacotaj1w9l0.afabebc1.png": "/ammola/marketcom-frontend/static/media/bxco4bjsnacotaj1w9l0.afabebc1.png",
+    "static/media/x66lj1b4y4j2vz2rn26x.d7c0f57a.png": "/ammola/marketcom-frontend/static/media/x66lj1b4y4j2vz2rn26x.d7c0f57a.png",
+    "static/media/xrvbpzjfhdhro9wooimh.fea15569.png": "/ammola/marketcom-frontend/static/media/xrvbpzjfhdhro9wooimh.fea15569.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.08d59da4.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.34ef3a1d.chunk.js",
+    "static/css/main.4dcb5163.chunk.css",
+    "static/js/main.d6bc685e.chunk.js"
+  ]
+}
