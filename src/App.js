@@ -60,6 +60,7 @@ export default class App extends Component {
       if (response.data.token != null) {
         localStorage.setItem("token", response.data.token);
        let user = decode(response.data.token);
+       console.log(user)
         this.setState({
           isAuth: true,
           user: user,
