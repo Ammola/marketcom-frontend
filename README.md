@@ -22,6 +22,7 @@ Authentication: JWT
 Authorization: Spring Security
 5) Build automation tool: Maven
 6) Relational DataBase design tool: MySQL Workbench
+7) Server: Apache Tomcat
 
 ## Frontend technologies
 1) Package manager: npm
@@ -38,7 +39,19 @@ React Bootstrap: https://www.npmjs.com/package/react-bootstrap
 2) Notify the seller of a new order made to one of (his/her) products.
 3) Upload images of products. 
 
-## Scrrenshots
+##User stories
+- As a (Customer/Shop owner) I want to sign in/up
+- As a (Customer/Shop owner) I want to (create/edit) a Profile
+- As a (Customer/Shop owner) I want to view multiple Products
+- As a (Customer/Shop owner) I want to add (multiple/single) Product(s) to the Cart
+- As a (Customer/Shop owner) I want to remove (multiple/single) Product(s) from the Cart
+- As a (Customer/Shop owner) I want to clear the Cart
+- As a (Customer/Shop owner) I want to checkout
+- As a (Customer/Shop owner) I want to view (multiple/single) Order(s)
+- As a (Shop owner) I want to (create/edit/delete) a Shop
+- As a (Shop owner) I want to (create/edit/delete) a Product
+
+## Screenshots
 
 ## Home page
 ![Demo](screenshots/1.gif)
