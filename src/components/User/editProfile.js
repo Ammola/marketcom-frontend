@@ -35,7 +35,7 @@ export default class editProfile extends Component {
         });
     }
     editrHandler=(newUser)=>{
-        axios.put(CroUrl+URL+"marketcom/user/editPersonalInfo",newUser,
+        axios.put(CroUrl+URL+"user/editPersonalInfo",newUser,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")

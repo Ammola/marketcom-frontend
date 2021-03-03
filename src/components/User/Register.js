@@ -40,7 +40,7 @@ export default class Register extends Component {
     if (!this.valid()) {
         alert("Passwords don't match");
     } else {
-        axios.post(CroUrl+URL+"marketcom/user/registration",newUser)
+        axios.post(CroUrl+URL+"user/registration",newUser)
         .then(response=>{
           console.log(response)
           if (response.data != null) {

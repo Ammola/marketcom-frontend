@@ -53,7 +53,7 @@ export default class App extends Component {
     }
   };
   loginHandler=(user)=>{
-    axios.post(CroUrl+URL+"marketcom/user/authenticate",user)
+    axios.post(CroUrl+URL+"user/authenticate",user)
     .then((response) => {
       console.log(response);
       console.log(response.data.token);

@@ -42,7 +42,7 @@ this.showrditForm=this.showrditForm.bind(this)
 }
 
     async loadshHandler(id){
-        axios.get(CroUrl+URL+`/marketcom/shop/index?id=${this.state.newUser.id}`)
+        axios.get(CroUrl+URL+`shop/index?id=${this.state.newUser.id}`)
         .then(response =>{
             console.log(response)
             this.setState({
@@ -80,7 +80,7 @@ this.showrditForm=this.showrditForm.bind(this)
     addShop=(shop)=>{
       console.log("shop")
       console.log(shop)
-      axios.post(CroUrl+URL+`marketcom/shop/add?id=${this.state.newUser.id}`,shop, {headers: {'Content-Type': 'application/json',"Authorization": "Bearer " + localStorage.getItem("token")}})
+      axios.post(CroUrl+URL+`shop/add?id=${this.state.newUser.id}`,shop, {headers: {'Content-Type': 'application/json',"Authorization": "Bearer " + localStorage.getItem("token")}})
       .then(response=>{
         console.log(response)
         this.loadshHandler();
@@ -95,7 +95,7 @@ this.showrditForm=this.showrditForm.bind(this)
    
 
     deleteshop= (userId,id) =>{
-      axios.delete(CroUrl+URL+`/marketcom/shop/delete?userId=${this.state.newUser.id}`,{
+      axios.delete(CroUrl+URL+`shop/delete?userId=${this.state.newUser.id}`,{
           headers: {
               "Authorization": "Bearer " + localStorage.getItem("token")
           }

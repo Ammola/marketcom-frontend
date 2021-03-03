@@ -32,7 +32,7 @@ export default class profile extends Component {
     }
     
      load(infouser){
-        axios.get(CroUrl+URL+"/marketcom/user/profile",
+        axios.get(CroUrl+URL+"user/profile",
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")

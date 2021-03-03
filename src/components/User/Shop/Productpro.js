@@ -42,7 +42,7 @@ export default class Productpro extends Component {
     }
 
     loadProductList = (id) => {
-        axios.get(CroUrl+URL+`/marketcom/product/index?id=${this.state.shop.id}`,
+        axios.get(CroUrl+URL+`product/index?id=${this.state.shop.id}`,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -60,7 +60,7 @@ export default class Productpro extends Component {
     }
 
     addProduct=(product,id)=>{
-        axios.post(CroUrl+URL+`/marketcom/product/add?shopId=${this.state.shop.id}`,product, 
+        axios.post(CroUrl+URL+`product/add?shopId=${this.state.shop.id}`,product, 
             {headers: {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem("token")}})
             .then(response=>{
               console.log(response)
@@ -73,7 +73,7 @@ export default class Productpro extends Component {
             })
           }
     deleteProduct= (id) =>{
-        axios.delete(CroUrl+URL+`/marketcom/product/delete?productId=${id}`,
+        axios.delete(CroUrl+URL+`product/delete?productId=${id}`,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -104,7 +104,7 @@ export default class Productpro extends Component {
     }
 
     editProduct = (product,id) =>{
-        axios.put(CroUrl+URL+`/marketcom/product/edit?shopId=${this.state.shop.id}`, product,
+        axios.put(CroUrl+URL+`product/edit?shopId=${this.state.shop.id}`, product,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")

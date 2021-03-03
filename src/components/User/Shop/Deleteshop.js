@@ -14,7 +14,7 @@ export default class Deleteshop extends Component {
         }
     }
     deleteshop= (userId,id) =>{
-        axios.delete(CroUrl+URL+`/marketcom/shop/delete?userId=${this.state.user.id}`,{
+        axios.delete(CroUrl+URL+`shop/delete?userId=${this.state.user.id}`,{
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }

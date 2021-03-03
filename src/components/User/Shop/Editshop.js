@@ -28,7 +28,7 @@ export default class Editshop extends Component {
   }
 
   editHandler=(newshop)=>{
-    axios.put(CroUrl+URL+"marketcom/shop/edit",newshop,
+    axios.put(CroUrl+URL+"shop/edit",newshop,
     {
       headers: {
         'Content-Type': 'application/json',
