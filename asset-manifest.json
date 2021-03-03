@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ammola/marketcom-frontend/static/css/main.4dcb5163.chunk.css",
-    "main.js": "/ammola/marketcom-frontend/static/js/main.6f512129.chunk.js",
-    "main.js.map": "/ammola/marketcom-frontend/static/js/main.6f512129.chunk.js.map",
+    "main.js": "/ammola/marketcom-frontend/static/js/main.cc651287.chunk.js",
+    "main.js.map": "/ammola/marketcom-frontend/static/js/main.cc651287.chunk.js.map",
     "runtime-main.js": "/ammola/marketcom-frontend/static/js/runtime-main.08d59da4.js",
     "runtime-main.js.map": "/ammola/marketcom-frontend/static/js/runtime-main.08d59da4.js.map",
     "static/css/2.150d169a.chunk.css": "/ammola/marketcom-frontend/static/css/2.150d169a.chunk.css",
@@ -26,6 +26,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.34ef3a1d.chunk.js",
     "static/css/main.4dcb5163.chunk.css",
-    "static/js/main.6f512129.chunk.js"
+    "static/js/main.cc651287.chunk.js"
   ]
 }
