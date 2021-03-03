@@ -40,5 +40,45 @@ React Bootstrap: https://www.npmjs.com/package/react-bootstrap
 
 ## Scrrenshots
 
+#### Home page
+![Demo](screenshots/1.gif)
+
+
+#### Log in
+![Demo](screenshots/2.gif)
+
+
+#### Edit profile
+![Demo](screenshots/3.gif)
+
+
+#### Add shop
+![Demo](screenshots/4.gif)
+
+
+#### Add a product to the cart
+![Demo](screenshots/5.gif)
+
+
+#### Change prduct's quantity in the cart and remove a product from the cart
+![Demo](screenshots/6.gif)
+
+
+#### Clear the cart
+![Demo](screenshots/7.gif)
+
+
+#### Checkout with PayPal
+![Demo](screenshots/8.gif)
+
+
+#### Home page
+![Demo](screenshots/9.gif)
+
+
+#### Check the confirmed order
+![Demo](screenshots/10.gif)
+
+
 
 ## Installation instructions
