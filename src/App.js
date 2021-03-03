@@ -9,6 +9,7 @@ import Cart from './components/Cart/Cart';
 import Default from './components/Default';
 import ProductList from './components/ProductList';
 import OrderList from './components/OrderList';
+import OrderDetails from './components/OrderDetails';
 import Product from './components/Product';
 import Model from './components/Model';
 import Register from './components/User/Register'
@@ -103,6 +104,7 @@ render() {
        <Route exact path="/" component={ProductList}/>
        <Route exact path="/orders" component={OrderList}/>
        <Route path="/details" component={Details}/>
+       <Route path="/order/details" component={OrderDetails}/>
        <Route path="/cart" component={Cart}/>
        <Route path="/register"  component={() => isAuth ? <ProductList/>:<Register/>}/>
        <Route path="/login"  component={() => isAuth ? <ProductList/> :<Login login={this.loginHandler}/>}/>

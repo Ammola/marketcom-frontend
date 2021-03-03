@@ -25,6 +25,7 @@ export default class ProductList extends Component {
                              <tr>
                                <th scope="col">Order ID</th>
                                <th scope="col">Amount</th>
+                               <th scope="col">Details</th>
                              </tr>
                            </thead>
                            </table>
@@ -36,12 +37,11 @@ export default class ProductList extends Component {
                                 console.log(orders.length)
                                 if(orders.length > 0){
                                 console.log("TRUE");
-                           return value.orders.map( order => {
-                            return <Order key={order.id} order={order} />})
+                               return value.orders.map( order => {
+                            return <Order key={order.id} order={order} orderDetail={value.orderDetail}/>})
                            } else {
                               return (<span>You dont have orders yet</span>)
-                           }
-                                    
+                           }     
                                 }}
                             </ProductConsumer>
                         </div>
