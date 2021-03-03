@@ -23,7 +23,8 @@ import Footer from './Home/Footer'
 const styles = {
   transition: 'all 1s ease-out'
 };
-
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 export default class App extends Component {
   state = {
     isAuth: false,
@@ -52,7 +53,7 @@ export default class App extends Component {
     }
   };
   loginHandler=(user)=>{
-    axios.post("marketcom/user/authenticate",user)
+    axios.post(CroUrl+URL+"marketcom/user/authenticate",user)
     .then((response) => {
       console.log(response);
       console.log(response.data.token);

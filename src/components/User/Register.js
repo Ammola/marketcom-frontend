@@ -12,6 +12,9 @@ import { Alert } from "react-bootstrap";
 const styles = {
   transition: 'all 1s ease-out'
 };
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
+
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -37,7 +40,7 @@ export default class Register extends Component {
     if (!this.valid()) {
         alert("Passwords don't match");
     } else {
-        axios.post("marketcom/user/registration",newUser)
+        axios.post(CroUrl+URL+"marketcom/user/registration",newUser)
         .then(response=>{
           console.log(response)
           if (response.data != null) {
