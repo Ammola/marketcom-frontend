@@ -11,7 +11,9 @@ import img1 from '../../assets/Male-user-edit-icon.png'
 import img2 from '../../assets/77c366436d8bd35fe8b3ce5b8c66992e.png'
 
 
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
 
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 
 export default class profile extends Component {
     constructor(props) {
@@ -30,7 +32,7 @@ export default class profile extends Component {
     }
     
      load(infouser){
-        axios.get("/marketcom/user/profile",
+        axios.get(CroUrl+URL+"/marketcom/user/profile",
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -80,6 +82,7 @@ export default class profile extends Component {
 <Switch>
                <Route exact path="/editprofile"  component={() =><Editprofile usera={this.state.user2}/>}/>
                <Route exact path="/shop"  component={() =><Shop usera={this.state.user2} />}/>
+
                
                
 </Switch>

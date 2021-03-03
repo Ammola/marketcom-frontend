@@ -9,7 +9,8 @@ import { Alert } from "react-bootstrap";
 const styles = {
   transition: 'all 1s ease-out'
 };
-
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 export default class Editshop extends Component {
     constructor(props){
         super(props);
@@ -27,7 +28,7 @@ export default class Editshop extends Component {
   }
 
   editHandler=(newshop)=>{
-    axios.put("marketcom/shop/edit",newshop,
+    axios.put(CroUrl+URL+"marketcom/shop/edit",newshop,
     {
       headers: {
         'Content-Type': 'application/json',

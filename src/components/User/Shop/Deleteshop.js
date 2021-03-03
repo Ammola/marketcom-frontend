@@ -3,7 +3,8 @@ import axios from "axios";
 import {Row, Col, Card, Form, InputGroup, FormControl, Button} from 'react-bootstrap';
 
 
-
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 export default class Deleteshop extends Component {
     constructor(props){
         super(props);
@@ -13,7 +14,7 @@ export default class Deleteshop extends Component {
         }
     }
     deleteshop= (userId,id) =>{
-        axios.delete(`/marketcom/shop/delete?userId=${this.state.user.id}`,{
+        axios.delete(CroUrl+URL+`/marketcom/shop/delete?userId=${this.state.user.id}`,{
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
