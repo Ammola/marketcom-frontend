@@ -29,10 +29,10 @@ Authorization: Spring Security
 2) Ajax technology: Axios
 3) UI library: React
 4) React libraries: 
-styled components: https://styled-components.com/
-Smart Payment Buttons V2: https://www.npmjs.com/package/react-paypal-button-v2
-React Router: https://www.npmjs.com/package/react-router
-React Bootstrap: https://www.npmjs.com/package/react-bootstrap
+- styled components: https://styled-components.com/
+- Smart Payment Buttons V2: https://www.npmjs.com/package/react-paypal-button-v2
+- React Router: https://www.npmjs.com/package/react-router
+- React Bootstrap: https://www.npmjs.com/package/react-bootstrap
 
 ## Unsolved problems
 1) Diplay order details including the ordered products and their quantities.
