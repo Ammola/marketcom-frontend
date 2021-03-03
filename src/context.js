@@ -5,6 +5,8 @@ import axios from "axios";
 const ProductContext = React.createContext();
 //Provider
 //Consumer
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 
 class ProductProvider extends Component {
     constructor(props) {
@@ -40,7 +42,7 @@ class ProductProvider extends Component {
     }
 
     loadProductList = () => {
-        axios.get("/marketcom/product/indexall")
+        axios.get(CroUrl+URL+"/marketcom/product/indexall")
             .then(response => {
                 this.setState(() => {
                     return { products: response.data }
@@ -78,7 +80,7 @@ class ProductProvider extends Component {
 
     loadOrders = () => {
         const userId = JSON.parse(localStorage.getItem('userId'))
-        axios.get(`/marketcom/order/index?userId=${userId}`)
+        axios.get(CroUrl+URL+`/marketcom/order/index?userId=${userId}`)
             .then(response => {
                 this.setState(() => {
                     return { orders: response.data }
@@ -97,7 +99,7 @@ class ProductProvider extends Component {
         console.log("Hello from loadOrderProducts")
         const detailOrder = JSON.parse(localStorage.getItem('detailOrder'))
         const orderId = detailOrder.id
-        axios.get(`/marketcom/order-products/index?orderId=${orderId}`)
+        axios.get(CroUrl+URL+`/marketcom/order-products/index?orderId=${orderId}`)
             .then(response => {
                 this.setState(() => {
                     return { detailOrderProducts: response.data }
@@ -134,7 +136,7 @@ class ProductProvider extends Component {
             "amount": details.purchase_units[0].amount.value
         });
         const userId = JSON.parse(localStorage.getItem('userId'))
-        const url = `marketcom/order/add?userId=${userId}`
+        const url =CroUrl+ URL+`marketcom/order/add?userId=${userId}`
         axios.post(url, params, {
             "headers": {
                 "Content-Type": "application/json",
@@ -162,7 +164,7 @@ class ProductProvider extends Component {
         console.log(product.id)
         console.log("orderId")
         console.log(this.state.orderId)
-        const url = `marketcom/product-to-order/add?productId=${product.id}&orderId=${this.state.orderId}`
+        const url = CroUrl+URL+`marketcom/product-to-order/add?productId=${product.id}&orderId=${this.state.orderId}`
         axios.post(url, params, {
             "headers": {
                 "Content-Type": "application/json",

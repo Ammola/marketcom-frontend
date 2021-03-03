@@ -14,7 +14,8 @@ const styles = {
     transition: 'all 1s ease-out'
 };
 
-
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 export default class Productpro extends Component {
     constructor(props){
         super(props);
@@ -41,7 +42,7 @@ export default class Productpro extends Component {
     }
 
     loadProductList = (id) => {
-        axios.get(`/marketcom/product/index?id=${this.state.shop.id}`,
+        axios.get(CroUrl+URL+`/marketcom/product/index?id=${this.state.shop.id}`,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -59,7 +60,7 @@ export default class Productpro extends Component {
     }
 
     addProduct=(product,id)=>{
-        axios.post(`/marketcom/product/add?shopId=${this.state.shop.id}`,product, 
+        axios.post(CroUrl+URL+`/marketcom/product/add?shopId=${this.state.shop.id}`,product, 
             {headers: {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem("token")}})
             .then(response=>{
               console.log(response)
@@ -72,7 +73,7 @@ export default class Productpro extends Component {
             })
           }
     deleteProduct= (id) =>{
-        axios.delete(`/marketcom/product/delete?productId=${id}`,
+        axios.delete(CroUrl+URL+`/marketcom/product/delete?productId=${id}`,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -103,7 +104,7 @@ export default class Productpro extends Component {
     }
 
     editProduct = (product,id) =>{
-        axios.put(`/marketcom/product/edit?shopId=${this.state.shop.id}`, product,
+        axios.put(CroUrl+URL+`/marketcom/product/edit?shopId=${this.state.shop.id}`, product,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")

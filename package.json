@@ -54,6 +54,5 @@
   },
   "resolutions": {
     "immer": "^8.0.1"
-  },
-  "proxy": "http://localhost:8081"
+  }
 }

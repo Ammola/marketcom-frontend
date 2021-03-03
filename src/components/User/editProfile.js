@@ -8,6 +8,8 @@ import { Alert } from "react-bootstrap";
 const styles = {
     transition: 'all 1s ease-out'
 };
+const URL="http://marketcomweb007-env.eba-knfd2xiy.us-east-2.elasticbeanstalk.com/"
+const CroUrl="https://cors-anywhere.herokuapp.com/"
 
 export default class editProfile extends Component {
     
@@ -33,7 +35,7 @@ export default class editProfile extends Component {
         });
     }
     editrHandler=(newUser)=>{
-        axios.put("marketcom/user/editPersonalInfo",newUser,
+        axios.put(CroUrl+URL+"marketcom/user/editPersonalInfo",newUser,
         {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
