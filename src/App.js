@@ -109,7 +109,7 @@ render() {
        <Route path="/order/details" component={OrderDetails}/>
        <Route path="/cart" component={Cart}/>
        <Route path="/register"  component={() => isAuth ? <ProductList/>:<Register/>}/>
-       <Route path="/login"  component={() => isAuth ? <ProductList/> :<Login login={this.loginHandler}/>}/>
+       <Route path="/login"  component={() => isAuth ? <Profile  user1={this.state.user}/> :<Login login={this.loginHandler}/>}/>
        <Route exact path="/profile"  component={()=> isAuth ? <Profile  user1={this.state.user}/>:null}/>
        
        
