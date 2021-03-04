@@ -29,7 +29,7 @@ Authorization: Spring Security
 2) Ajax technology: Axios
 3) UI library: React
 4) React libraries: 
-- styled components: https://styled-components.com/
+- Styled components: https://styled-components.com/
 - Smart Payment Buttons V2: https://www.npmjs.com/package/react-paypal-button-v2
 - React Router: https://www.npmjs.com/package/react-router
 - React Bootstrap: https://www.npmjs.com/package/react-bootstrap
@@ -39,7 +39,7 @@ Authorization: Spring Security
 2) Notify the seller of a new order made to one of (his/her) products.
 3) Upload images of products. 
 
-##User stories
+## User stories
 - As a (Customer/Shop owner) I want to sign in/up
 - As a (Customer/Shop owner) I want to (create/edit) a Profile
 - As a (Customer/Shop owner) I want to view multiple Products
