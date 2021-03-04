@@ -51,7 +51,7 @@ Authorization: Spring Security
 - As a (Shop owner) I want to (create/edit/delete) a Shop
 - As a (Shop owner) I want to (create/edit/delete) a Product
 
-## Screenshots
+## Demo
 
 ## Home page
 ![Demo](screenshots/1.gif)
