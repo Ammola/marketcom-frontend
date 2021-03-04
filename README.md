@@ -35,9 +35,9 @@ Authorization: Spring Security
 - React Bootstrap: https://www.npmjs.com/package/react-bootstrap
 
 ## Unsolved problems
-1) Diplay order details including the ordered products and their quantities.
-2) Notify the seller of a new order made to one of (his/her) products.
-3) Upload images of products. 
+1) Diplay order details including the ordered products and their quantities
+2) Notify the seller of a new order made to one of (his/her) products
+3) Upload images of products
 
 ## User stories
 - As a (Customer/Shop owner) I want to sign in/up
